@@ -74,8 +74,8 @@ export default function GEXHomepage() {
     return num.toLocaleString();
   };
 
-  // Logo helper - using Clearbit Logo API
-  const getLogo = (domain: string) => `https://logo.clearbit.com/${domain}`;
+  // Logo helper - using icon.horse for reliable logos
+  const getLogo = (domain: string) => `https://icon.horse/icon/${domain}`;
 
   // Image paths for Vercel deployment
   const images = {
@@ -561,7 +561,7 @@ export default function GEXHomepage() {
                     <img
                       src={getLogo(study.domain)}
                       alt={study.name}
-                      className="h-8 w-auto object-contain filter brightness-0 invert opacity-60 group-hover:opacity-100 transition-all duration-300"
+                      className="h-8 w-8 object-contain rounded"
                       onError={(e) => {
                         const target = e.target as HTMLImageElement;
                         target.style.display = 'none';
@@ -753,7 +753,7 @@ export default function GEXHomepage() {
                 <img
                   src={getLogo(client.domain)}
                   alt={client.name}
-                  className="h-7 w-auto object-contain filter brightness-0 invert"
+                  className="h-7 w-auto object-contain rounded"
                   onError={(e) => (e.target as HTMLImageElement).style.display = 'none'}
                 />
               </div>
@@ -778,11 +778,11 @@ export default function GEXHomepage() {
                 className="border-glow rounded-xl p-4 transition-all text-center bg-white/[0.02] border border-white/5 hover:border-white/20 cursor-pointer card-hover"
               >
                 {/* Logo above company name */}
-                <div className="flex justify-center mb-3 h-8">
+                <div className="flex justify-center mb-3 h-8 items-center">
                   <img
                     src={getLogo(client.domain)}
                     alt={client.name}
-                    className="h-8 w-auto object-contain filter brightness-0 invert opacity-50"
+                    className="h-8 w-8 object-contain rounded"
                     onError={(e) => (e.target as HTMLImageElement).style.display = 'none'}
                   />
                 </div>
