@@ -193,13 +193,13 @@ export default function GEXHomepage() {
     },
     {
       name: 'Arketa',
-      domain: 'arketa.co',
+      domain: 'arketa.com',
       metric: '3-5 positive responses per day',
       description: 'Consistent results reaching yoga studios for their fitness app.'
     },
     {
       name: 'Troveo',
-      domain: 'troveo.com',
+      domain: 'troveo.ai',
       metric: '8 positive responses per day',
       note: 'AI targeting',
       description: 'Using AI to parse through and analyze videographer content to identify highest-value prospects.'
@@ -225,7 +225,7 @@ export default function GEXHomepage() {
     },
     {
       name: 'Rively',
-      domain: 'rively.com',
+      domain: 'rivly.com',
       metric: 'Check out our case study',
       isLink: true,
       description: 'Full case study available detailing our partnership and results.'
