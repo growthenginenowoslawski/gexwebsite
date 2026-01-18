@@ -547,87 +547,6 @@ export default function GEXHomepage() {
         </div>
       </section>
 
-      {/* What Our Partners Say */}
-      <section className="px-8 py-12 border-t border-white/5">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-center font-display text-2xl md:text-3xl font-bold mb-8 tracking-tight">
-            What Our Partners Say
-          </h2>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {/* Clay */}
-            <div className="bg-white/[0.02] border border-white/10 rounded-xl p-5">
-              <div className="flex items-center gap-3 mb-3">
-                <img src={getLogo('clay.com')} alt="Clay" className="h-8 w-8 rounded" />
-                <div>
-                  <p className="font-semibold text-white text-sm">Clay</p>
-                  <p className="text-xs text-neutral-500">Roger Tabchouri, Engineer</p>
-                </div>
-              </div>
-              <p className="text-sm text-neutral-300 italic leading-relaxed">
-                &quot;Eric&apos;s workspace is consistently the most used workspace and he&apos;s our largest user. I trust you to push Clay to the edge of what it can do.&quot;
-              </p>
-            </div>
-
-            {/* Smartlead */}
-            <div className="bg-white/[0.02] border border-white/10 rounded-xl p-5">
-              <div className="flex items-center gap-3 mb-3">
-                <img src={getLogo('smartlead.ai')} alt="Smartlead" className="h-8 w-8 rounded" />
-                <div>
-                  <p className="font-semibold text-white text-sm">Smartlead</p>
-                  <p className="text-xs text-neutral-500">Vaibhav, Founder</p>
-                </div>
-              </div>
-              <p className="text-sm text-neutral-300 italic leading-relaxed">
-                &quot;Eric is constantly in the top three of all generated replies across our entire platform and he just switches back and forth with other agency owners for those top spots. His email volumes and reply rates are verified by us as well.&quot;
-              </p>
-            </div>
-
-            {/* Outbound Sync */}
-            <div className="bg-white/[0.02] border border-white/10 rounded-xl p-5">
-              <div className="flex items-center gap-3 mb-3">
-                <img src={getLogo('outboundsync.com')} alt="Outbound Sync" className="h-8 w-8 rounded" />
-                <div>
-                  <p className="font-semibold text-white text-sm">Outbound Sync</p>
-                  <p className="text-xs text-neutral-500">Harris Kenney, Founder</p>
-                </div>
-              </div>
-              <p className="text-sm text-neutral-300 italic leading-relaxed">
-                &quot;We get a behind-the-scenes look at Growth Engine X and their operations every day, and we would highly recommend them as one of our top agency partners. They really execute at another level.&quot;
-              </p>
-            </div>
-
-            {/* HyperTide */}
-            <div className="bg-white/[0.02] border border-white/10 rounded-xl p-5">
-              <div className="flex items-center gap-3 mb-3">
-                <img src={getLogo('hypertide.io')} alt="HyperTide" className="h-8 w-8 rounded" />
-                <div>
-                  <p className="font-semibold text-white text-sm">HyperTide</p>
-                  <p className="text-xs text-neutral-500">Omer, Founder</p>
-                </div>
-              </div>
-              <p className="text-sm text-neutral-300 italic leading-relaxed">
-                &quot;Eric is our largest user and gives us a ton of feedback on how to make the platform better. And he has purchased more domains than anybody else, so we can verify that his email volume is absolutely correct.&quot;
-              </p>
-            </div>
-
-            {/* OpsKings */}
-            <div className="bg-white/[0.02] border border-white/10 rounded-xl p-5">
-              <div className="flex items-center gap-3 mb-3">
-                <img src={getLogo('opskings.com')} alt="OpsKings" className="h-8 w-8 rounded" />
-                <div>
-                  <p className="font-semibold text-white text-sm">OpsKings</p>
-                  <p className="text-xs text-neutral-500">Stephen, Founder</p>
-                </div>
-              </div>
-              <p className="text-sm text-neutral-300 italic leading-relaxed">
-                &quot;We built the analytics system on behalf of Eric&apos;s team and have seen the numbers first-hand. They&apos;re in another level of operations as far as comparing the other cold email agencies that we work with.&quot;
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Case Study Modal */}
       {activeModal && (
         <div
@@ -1101,43 +1020,88 @@ export default function GEXHomepage() {
         </div>
       </section>
 
-      {/* Partners / Validation Section */}
-      <section className="px-8 py-20">
-        <div className="max-w-7xl mx-auto text-center">
-          <p className="text-xs text-neutral-500 uppercase tracking-[0.2em] mb-2 font-body font-medium">
-            What Our Partners Say
-          </p>
-          <p className="text-neutral-400 mb-10 text-sm font-body font-light max-w-xl mx-auto">
-            They get an inside look at our work and can verify our success. Not just as an individual customer, but as a whole business.
-          </p>
-
-          {/* Clay Elite Badge in Partners Section */}
-          <div className="flex justify-center mb-8">
-            <img
-              src={images.clayEliteCircle}
-              alt="Clay Elite Studio Solutions Partner"
-              className="h-24 w-auto hover:scale-105 transition-transform"
-              onError={(e) => (e.target as HTMLImageElement).style.display = 'none'}
-            />
+      {/* What Our Partners Say */}
+      <section className="px-8 py-16">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-10">
+            <h2 className="font-display text-3xl md:text-4xl font-bold mb-3 tracking-tight">
+              What Our Partners Say
+            </h2>
+            <p className="text-neutral-400 text-sm font-body font-light max-w-xl mx-auto">
+              They get an inside look at our work and can verify our success.
+            </p>
           </div>
 
-          <div className="flex justify-center gap-4 flex-wrap">
-            {partners.map((partner, i) => (
-              <div key={i} className="border-glow stat-card border border-white/10 px-6 py-4 rounded-xl flex items-center gap-3 card-hover">
-                <img
-                  src={getLogo(partner.domain)}
-                  alt={partner.name}
-                  className="h-6 w-auto object-contain"
-                  onError={(e) => (e.target as HTMLImageElement).style.display = 'none'}
-                />
-                <div className="text-left">
-                  <span className="font-display font-semibold text-neutral-300 block">{partner.name}</span>
-                  {partner.note && (
-                    <span className="text-xs text-neutral-500">{partner.note}</span>
-                  )}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {/* Clay */}
+            <div className="bg-white/[0.02] border border-white/10 rounded-xl p-5">
+              <div className="flex items-center gap-3 mb-3">
+                <img src={getLogo('clay.com')} alt="Clay" className="h-8 w-8 rounded" />
+                <div>
+                  <p className="font-semibold text-white text-sm">Clay</p>
+                  <p className="text-xs text-neutral-500">Roger Tabchouri, Engineer</p>
                 </div>
               </div>
-            ))}
+              <p className="text-sm text-neutral-300 italic leading-relaxed">
+                &quot;Eric&apos;s workspace is consistently the most used workspace and he&apos;s our largest user. I trust you to push Clay to the edge of what it can do.&quot;
+              </p>
+            </div>
+
+            {/* Smartlead */}
+            <div className="bg-white/[0.02] border border-white/10 rounded-xl p-5">
+              <div className="flex items-center gap-3 mb-3">
+                <img src={getLogo('smartlead.ai')} alt="Smartlead" className="h-8 w-8 rounded" />
+                <div>
+                  <p className="font-semibold text-white text-sm">Smartlead</p>
+                  <p className="text-xs text-neutral-500">Vaibhav, Founder</p>
+                </div>
+              </div>
+              <p className="text-sm text-neutral-300 italic leading-relaxed">
+                &quot;Eric is constantly in the top three of all generated replies across our entire platform and he just switches back and forth with other agency owners for those top spots. His email volumes and reply rates are verified by us as well.&quot;
+              </p>
+            </div>
+
+            {/* Outbound Sync */}
+            <div className="bg-white/[0.02] border border-white/10 rounded-xl p-5">
+              <div className="flex items-center gap-3 mb-3">
+                <img src={getLogo('outboundsync.com')} alt="Outbound Sync" className="h-8 w-8 rounded" />
+                <div>
+                  <p className="font-semibold text-white text-sm">Outbound Sync</p>
+                  <p className="text-xs text-neutral-500">Harris Kenney, Founder</p>
+                </div>
+              </div>
+              <p className="text-sm text-neutral-300 italic leading-relaxed">
+                &quot;We get a behind-the-scenes look at Growth Engine X and their operations every day, and we would highly recommend them as one of our top agency partners. They really execute at another level.&quot;
+              </p>
+            </div>
+
+            {/* HyperTide */}
+            <div className="bg-white/[0.02] border border-white/10 rounded-xl p-5">
+              <div className="flex items-center gap-3 mb-3">
+                <img src={getLogo('hypertide.io')} alt="HyperTide" className="h-8 w-8 rounded" />
+                <div>
+                  <p className="font-semibold text-white text-sm">HyperTide</p>
+                  <p className="text-xs text-neutral-500">Omer, Founder</p>
+                </div>
+              </div>
+              <p className="text-sm text-neutral-300 italic leading-relaxed">
+                &quot;Eric is our largest user and gives us a ton of feedback on how to make the platform better. And he has purchased more domains than anybody else, so we can verify that his email volume is absolutely correct.&quot;
+              </p>
+            </div>
+
+            {/* OpsKings */}
+            <div className="bg-white/[0.02] border border-white/10 rounded-xl p-5">
+              <div className="flex items-center gap-3 mb-3">
+                <img src={getLogo('opskings.com')} alt="OpsKings" className="h-8 w-8 rounded" />
+                <div>
+                  <p className="font-semibold text-white text-sm">OpsKings</p>
+                  <p className="text-xs text-neutral-500">Stephen, Founder</p>
+                </div>
+              </div>
+              <p className="text-sm text-neutral-300 italic leading-relaxed">
+                &quot;We built the analytics system on behalf of Eric&apos;s team and have seen the numbers first-hand. They&apos;re in another level of operations as far as comparing the other cold email agencies that we work with.&quot;
+              </p>
+            </div>
           </div>
         </div>
       </section>
