@@ -466,7 +466,7 @@ export default function GEXHomepage() {
           </div>
           <div className="flex gap-8 items-center">
             <a href="#methodology" className="nav-link text-sm font-medium text-neutral-400 hover:text-white transition-colors">Methodology</a>
-            <a href="#results" className="nav-link text-sm font-medium text-neutral-400 hover:text-white transition-colors">More Results</a>
+            <a href="https://gamma.app/docs/Collection-of-GEX-Social-Proof-qwtscnnuryij6yj" target="_blank" rel="noopener noreferrer" className="nav-link text-sm font-medium text-neutral-400 hover:text-white transition-colors">More Results</a>
             <a href="#" className="nav-link text-sm font-medium text-red-500 hover:text-red-400 transition-colors flex items-center gap-1.5">
               Growth Drops
               <span className="text-xs">✦</span>
