@@ -74,8 +74,8 @@ export default function GEXHomepage() {
     return num.toLocaleString();
   };
 
-  // Logo helper - using logo.debounce.com
-  const getLogo = (domain: string) => `https://logo.debounce.com/${domain}`;
+  // Logo helper - using Clearbit Logo API
+  const getLogo = (domain: string) => `https://logo.clearbit.com/${domain}`;
 
   // Image paths for Vercel deployment
   const images = {
@@ -471,9 +471,9 @@ export default function GEXHomepage() {
               Growth Drops
               <span className="text-xs">✦</span>
             </a>
-            <button className="btn-hover bg-red-700 text-white px-5 py-2.5 rounded-lg text-sm font-semibold">
+            <a href="https://tally.so/r/meK550" target="_blank" rel="noopener noreferrer" className="btn-hover bg-red-700 text-white px-5 py-2.5 rounded-lg text-sm font-semibold">
               Apply for Free Test →
-            </button>
+            </a>
           </div>
         </div>
       </nav>
@@ -537,9 +537,9 @@ export default function GEXHomepage() {
           </p>
 
           <div className="flex gap-4 justify-center flex-wrap">
-            <button className="btn-hover bg-gradient-to-r from-red-600 to-red-700 text-white px-8 py-4 rounded-xl font-display font-semibold text-lg">
+            <a href="https://tally.so/r/meK550" target="_blank" rel="noopener noreferrer" className="btn-hover bg-gradient-to-r from-red-600 to-red-700 text-white px-8 py-4 rounded-xl font-display font-semibold text-lg">
               Apply for Free Test Campaign →
-            </button>
+            </a>
             <button className="btn-hover border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-8 py-4 rounded-xl font-body font-medium transition-all">
               Looking to scale what&apos;s working? Let&apos;s talk
             </button>
@@ -1108,9 +1108,9 @@ export default function GEXHomepage() {
           <p className="text-xl text-neutral-400 mb-12 leading-relaxed font-body font-light">
             B2B companies with $1M+ revenue. Free test campaign. Real results.
           </p>
-          <button className="btn-hover bg-gradient-to-r from-red-500 to-red-700 text-white px-12 py-5 rounded-xl text-lg font-display font-bold shadow-lg shadow-red-900/30">
+          <a href="https://tally.so/r/meK550" target="_blank" rel="noopener noreferrer" className="btn-hover bg-gradient-to-r from-red-500 to-red-700 text-white px-12 py-5 rounded-xl text-lg font-display font-bold shadow-lg shadow-red-900/30 inline-block">
             Apply for Your Free Test Campaign →
-          </button>
+          </a>
           <p className="text-neutral-600 mt-8 font-body font-light">No commitment. See positive responses before you decide.</p>
         </div>
       </section>
