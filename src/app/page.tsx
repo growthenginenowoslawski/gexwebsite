@@ -478,52 +478,14 @@ export default function GEXHomepage() {
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section className="px-8 pt-24 pb-20 relative overflow-hidden">
+      {/* Hero Section - Compact */}
+      <section className="px-8 pt-16 pb-8 relative overflow-hidden">
         {/* Ambient background glows */}
         <div className="absolute top-20 left-1/4 w-[500px] h-[500px] bg-red-700/8 rounded-full blur-3xl pointer-events-none pulse-glow"></div>
         <div className="absolute top-40 right-1/4 w-[400px] h-[400px] bg-red-900/5 rounded-full blur-3xl pointer-events-none pulse-glow" style={{ animationDelay: '2s' }}></div>
 
         <div className="max-w-7xl mx-auto text-center relative z-10">
-          {/* Clay Elite Studio Badge - Prominent in Hero */}
-          <div className="flex justify-center mb-8">
-            <div className="relative group">
-              <img
-                src={images.clayElitePill}
-                alt="Clay Elite Studio Solutions Partner 2026"
-                className="h-14 w-auto rounded-full shadow-lg shadow-cyan-500/20 hover:scale-105 transition-transform cursor-pointer"
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  const parent = target.parentElement;
-                  if (parent) {
-                    parent.innerHTML = '<div class="badge-shine border border-cyan-500/30 rounded-full px-5 py-2.5 flex items-center gap-3"><span class="text-lg">🏆</span><div class="text-left"><p class="text-xs font-semibold text-white">Clay Elite Studio</p><p class="text-xs text-neutral-500">Solutions Partner 2026</p></div></div>';
-                  }
-                }}
-              />
-              {/* Tooltip */}
-              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-3 px-4 py-2 bg-neutral-900 border border-white/10 rounded-lg text-xs text-neutral-300 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-50">
-                Largest customer by enrichment volume
-              </div>
-            </div>
-          </div>
-
-          {/* Smartlead Badge */}
-          <div className="flex justify-center gap-4 mb-10">
-            <div className="group relative">
-              <div className="bg-gradient-to-r from-green-900/30 to-green-800/20 border border-green-500/30 rounded-full px-5 py-2.5 flex items-center gap-3 hover:border-green-500/60 transition-all cursor-default">
-                <span className="text-lg">📈</span>
-                <div className="text-left">
-                  <p className="text-xs font-semibold text-white">Smartlead Top 3</p>
-                  <p className="text-xs text-neutral-500">By reply volume</p>
-                </div>
-              </div>
-              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 px-3 py-2 bg-neutral-900 border border-white/10 rounded-lg text-xs text-neutral-300 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
-                Only 2 other accounts get more replies on the entire platform
-              </div>
-            </div>
-          </div>
-
-          <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] mb-8 tracking-tight">
+          <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold leading-[0.95] mb-6 tracking-tight">
             <span className="text-white">We Send</span>{' '}
             <span className="text-red-500 text-shadow-glow">8 Million+</span>
             <br />
@@ -532,11 +494,11 @@ export default function GEXHomepage() {
             <span className="text-neutral-400 font-medium text-4xl md:text-5xl lg:text-6xl">We Know What Converts.</span>
           </h1>
 
-          <p className="text-lg md:text-xl text-neutral-400 mb-12 max-w-2xl mx-auto leading-relaxed font-body font-light">
+          <p className="text-lg md:text-xl text-neutral-400 mb-8 max-w-2xl mx-auto leading-relaxed font-body font-light">
             B2B lead generation for companies with $1M+ in revenue. Launch a free test campaign and see results before you commit.
           </p>
 
-          <div className="flex gap-4 justify-center flex-wrap">
+          <div className="flex gap-4 justify-center flex-wrap mb-12">
             <a href="https://tally.so/r/meK550" target="_blank" rel="noopener noreferrer" className="btn-hover bg-gradient-to-r from-red-600 to-red-700 text-white px-8 py-4 rounded-xl font-display font-semibold text-lg">
               Apply for Free Test Campaign →
             </a>
@@ -545,17 +507,17 @@ export default function GEXHomepage() {
             </button>
           </div>
 
-          {/* Hero Case Studies */}
-          <div className="mt-24">
-            <p className="text-xs text-neutral-500 uppercase tracking-[0.2em] mb-10 font-body font-medium">
+          {/* Hero Case Studies - Above the fold */}
+          <div>
+            <p className="text-xs text-neutral-500 uppercase tracking-[0.2em] mb-6 font-body font-medium">
               Trusted by industry leaders. Click to see results.
             </p>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-5xl mx-auto">
               {Object.entries(caseStudies).map(([key, study]) => (
                 <button
                   key={key}
                   onClick={() => setActiveModal(key)}
-                  className="group border-glow bg-white/[0.02] border border-white/10 hover:border-red-700/50 rounded-2xl p-6 text-center transition-all card-hover backdrop-blur-sm"
+                  className="group border-glow bg-white/[0.02] border border-white/10 hover:border-red-700/50 rounded-xl p-4 text-center transition-all card-hover backdrop-blur-sm"
                 >
                   <div className="flex justify-center mb-4 h-10 items-center">
                     <img
@@ -580,6 +542,87 @@ export default function GEXHomepage() {
                   </span>
                 </button>
               ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* What Our Partners Say */}
+      <section className="px-8 py-12 border-t border-white/5">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-center font-display text-2xl md:text-3xl font-bold mb-8 tracking-tight">
+            What Our Partners Say
+          </h2>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {/* Clay */}
+            <div className="bg-white/[0.02] border border-white/10 rounded-xl p-5">
+              <div className="flex items-center gap-3 mb-3">
+                <img src={getLogo('clay.com')} alt="Clay" className="h-8 w-8 rounded" />
+                <div>
+                  <p className="font-semibold text-white text-sm">Clay</p>
+                  <p className="text-xs text-neutral-500">Roger Tabchouri, Engineer</p>
+                </div>
+              </div>
+              <p className="text-sm text-neutral-300 italic leading-relaxed">
+                &quot;Eric&apos;s workspace is consistently the most used workspace and he&apos;s our largest user. I trust you to push Clay to the edge of what it can do.&quot;
+              </p>
+            </div>
+
+            {/* Smartlead */}
+            <div className="bg-white/[0.02] border border-white/10 rounded-xl p-5">
+              <div className="flex items-center gap-3 mb-3">
+                <img src={getLogo('smartlead.ai')} alt="Smartlead" className="h-8 w-8 rounded" />
+                <div>
+                  <p className="font-semibold text-white text-sm">Smartlead</p>
+                  <p className="text-xs text-neutral-500">Vaibhav, Founder</p>
+                </div>
+              </div>
+              <p className="text-sm text-neutral-300 italic leading-relaxed">
+                &quot;Eric is constantly in the top three of all generated replies across our entire platform and he just switches back and forth with other agency owners for those top spots. His email volumes and reply rates are verified by us as well.&quot;
+              </p>
+            </div>
+
+            {/* Outbound Sync */}
+            <div className="bg-white/[0.02] border border-white/10 rounded-xl p-5">
+              <div className="flex items-center gap-3 mb-3">
+                <img src={getLogo('outboundsync.com')} alt="Outbound Sync" className="h-8 w-8 rounded" />
+                <div>
+                  <p className="font-semibold text-white text-sm">Outbound Sync</p>
+                  <p className="text-xs text-neutral-500">Harris Kenney, Founder</p>
+                </div>
+              </div>
+              <p className="text-sm text-neutral-300 italic leading-relaxed">
+                &quot;We get a behind-the-scenes look at Growth Engine X and their operations every day, and we would highly recommend them as one of our top agency partners. They really execute at another level.&quot;
+              </p>
+            </div>
+
+            {/* HyperTide */}
+            <div className="bg-white/[0.02] border border-white/10 rounded-xl p-5">
+              <div className="flex items-center gap-3 mb-3">
+                <img src={getLogo('hypertide.io')} alt="HyperTide" className="h-8 w-8 rounded" />
+                <div>
+                  <p className="font-semibold text-white text-sm">HyperTide</p>
+                  <p className="text-xs text-neutral-500">Omer, Founder</p>
+                </div>
+              </div>
+              <p className="text-sm text-neutral-300 italic leading-relaxed">
+                &quot;Eric is our largest user and gives us a ton of feedback on how to make the platform better. And he has purchased more domains than anybody else, so we can verify that his email volume is absolutely correct.&quot;
+              </p>
+            </div>
+
+            {/* OpsKings */}
+            <div className="bg-white/[0.02] border border-white/10 rounded-xl p-5">
+              <div className="flex items-center gap-3 mb-3">
+                <img src={getLogo('opskings.com')} alt="OpsKings" className="h-8 w-8 rounded" />
+                <div>
+                  <p className="font-semibold text-white text-sm">OpsKings</p>
+                  <p className="text-xs text-neutral-500">Stephen, Founder</p>
+                </div>
+              </div>
+              <p className="text-sm text-neutral-300 italic leading-relaxed">
+                &quot;We built the analytics system on behalf of Eric&apos;s team and have seen the numbers first-hand. They&apos;re in another level of operations as far as comparing the other cold email agencies that we work with.&quot;
+              </p>
             </div>
           </div>
         </div>
