@@ -4,7 +4,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'img.logo.dev',
+        hostname: 'logo.debounce.com',
         port: '',
         pathname: '/**',
       },

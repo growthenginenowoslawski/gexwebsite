@@ -74,8 +74,8 @@ export default function GEXHomepage() {
     return num.toLocaleString();
   };
 
-  // Logo helper - using debounce instead of clearbit
-  const getLogo = (domain: string) => `https://img.logo.dev/${domain}?token=pk_VAZ6tvAVQHCDwKeqFP7f5A`;
+  // Logo helper - using logo.debounce.com
+  const getLogo = (domain: string) => `https://logo.debounce.com/${domain}`;
 
   // Image paths for Vercel deployment
   const images = {
