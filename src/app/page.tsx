@@ -791,7 +791,7 @@ export default function GEXHomepage() {
                   <span className="text-xs text-neutral-600 font-body block text-center">Partnered for {client.years} years</span>
                 )}
                 {client.metric && (
-                  <p className={`font-bold text-xs mt-2 text-center ${client.isLink ? 'text-blue-400' : 'text-red-500'}`}>
+                  <p className="font-bold text-xs mt-2 text-center text-red-500">
                     {client.metric}
                     {client.isLink && ' →'}
                   </p>
