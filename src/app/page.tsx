@@ -440,13 +440,13 @@ export default function GEXHomepage() {
       `}</style>
 
       {/* Navigation */}
-      <nav className="border-b border-white/5 px-8 py-5 sticky top-0 z-40 backdrop-blur-2xl bg-black/60">
+      <nav className="border-b border-white/5 px-4 md:px-8 py-4 md:py-5 sticky top-0 z-40 backdrop-blur-2xl bg-black/60">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 md:gap-3">
             <img
               src={images.gexLogo}
               alt="Growth Engine X"
-              className="h-10 w-auto"
+              className="h-8 md:h-10 w-auto"
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
                 target.style.display = 'none';
@@ -462,24 +462,25 @@ export default function GEXHomepage() {
                 <line x1="65" y1="90" x2="90" y2="20" stroke="#B91C1C" strokeWidth="8"/>
               </svg>
             </div>
-            <span className="font-display font-bold text-xl tracking-tight">GROWTH ENGINE X</span>
+            <span className="font-display font-bold text-base md:text-xl tracking-tight">GROWTH ENGINE X</span>
           </div>
-          <div className="flex gap-8 items-center">
-            <a href="#methodology" className="nav-link text-sm font-medium text-neutral-400 hover:text-white transition-colors">Methodology</a>
-            <a href="https://gamma.app/docs/Collection-of-GEX-Social-Proof-qwtscnnuryij6yj" target="_blank" rel="noopener noreferrer" className="nav-link text-sm font-medium text-neutral-400 hover:text-white transition-colors">More Results</a>
-            <a href="#" className="nav-link text-sm font-medium text-red-500 hover:text-red-400 transition-colors flex items-center gap-1.5">
+          <div className="flex gap-4 md:gap-8 items-center">
+            <a href="#methodology" className="nav-link text-sm font-medium text-neutral-400 hover:text-white transition-colors hidden md:block">Methodology</a>
+            <a href="https://gamma.app/docs/Collection-of-GEX-Social-Proof-qwtscnnuryij6yj" target="_blank" rel="noopener noreferrer" className="nav-link text-sm font-medium text-neutral-400 hover:text-white transition-colors hidden md:block">More Results</a>
+            <a href="#" className="nav-link text-sm font-medium text-red-500 hover:text-red-400 transition-colors hidden md:flex items-center gap-1.5">
               Growth Drops
               <span className="text-xs">✦</span>
             </a>
-            <a href="https://tally.so/r/meK550" target="_blank" rel="noopener noreferrer" className="btn-hover bg-red-700 text-white px-5 py-2.5 rounded-lg text-sm font-semibold">
-              Apply for Free Test →
+            <a href="https://tally.so/r/meK550" target="_blank" rel="noopener noreferrer" className="btn-hover bg-red-700 text-white px-4 py-2 md:px-5 md:py-2.5 rounded-lg text-sm font-semibold">
+              Apply →
+              <span className="hidden md:inline"> for Free Test</span>
             </a>
           </div>
         </div>
       </nav>
 
       {/* Hero Section - Compact */}
-      <section className="px-8 pt-16 pb-8 relative overflow-hidden">
+      <section className="px-4 md:px-8 pt-10 md:pt-16 pb-6 md:pb-8 relative overflow-hidden">
         {/* Ambient background glows */}
         <div className="absolute top-20 left-1/4 w-[500px] h-[500px] bg-red-700/8 rounded-full blur-3xl pointer-events-none pulse-glow"></div>
         <div className="absolute top-40 right-1/4 w-[400px] h-[400px] bg-red-900/5 rounded-full blur-3xl pointer-events-none pulse-glow" style={{ animationDelay: '2s' }}></div>
@@ -498,11 +499,11 @@ export default function GEXHomepage() {
             B2B lead generation for companies with $1M+ in revenue. Launch a free test campaign and see results before you commit.
           </p>
 
-          <div className="flex gap-4 justify-center flex-wrap mb-12">
-            <a href="https://tally.so/r/meK550" target="_blank" rel="noopener noreferrer" className="btn-hover bg-gradient-to-r from-red-600 to-red-700 text-white px-8 py-4 rounded-xl font-display font-semibold text-lg">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-8 md:mb-12">
+            <a href="https://tally.so/r/meK550" target="_blank" rel="noopener noreferrer" className="btn-hover bg-gradient-to-r from-red-600 to-red-700 text-white px-6 md:px-8 py-3 md:py-4 rounded-xl font-display font-semibold text-base md:text-lg">
               Apply for Free Test Campaign →
             </a>
-            <button className="btn-hover border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-8 py-4 rounded-xl font-body font-medium transition-all">
+            <button className="btn-hover border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-6 md:px-8 py-3 md:py-4 rounded-xl font-body font-medium transition-all text-sm md:text-base">
               Looking to scale what&apos;s working? Let&apos;s talk
             </button>
           </div>
@@ -677,7 +678,7 @@ export default function GEXHomepage() {
       )}
 
       {/* Free Test Section */}
-      <section className="px-8 py-16">
+      <section className="px-4 md:px-8 py-12 md:py-16">
         <div className="max-w-7xl mx-auto text-center">
           <div className="max-w-2xl mx-auto mb-12">
             <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 tracking-tight">See Results Before You Commit</h2>
@@ -725,7 +726,7 @@ export default function GEXHomepage() {
       </section>
 
       {/* Results Section */}
-      <section id="results" className="px-8 py-16">
+      <section id="results" className="px-4 md:px-8 py-12 md:py-16">
         <div className="max-w-7xl mx-auto text-center">
           <div className="mb-12">
             <h2 className="font-display text-4xl md:text-5xl font-bold mb-4 tracking-tight">The Results Speak for Themselves</h2>
@@ -771,13 +772,13 @@ export default function GEXHomepage() {
       </section>
 
       {/* Timeline */}
-      <section className="px-8 py-20 border-y border-white/5">
+      <section className="px-4 md:px-8 py-12 md:py-20 border-y border-white/5">
         <div className="max-w-7xl mx-auto text-center">
-          <h2 className="font-display text-4xl md:text-5xl font-bold mb-20 tracking-tight">How We Work Together</h2>
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-10 md:mb-20 tracking-tight">How We Work Together</h2>
 
           <div className="relative max-w-5xl mx-auto">
-            <div className="absolute top-8 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent hidden md:block"></div>
-            <div className="grid md:grid-cols-5 gap-6">
+            <div className="absolute top-8 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent hidden lg:block"></div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
               {[
                 { phase: 'Free Test', title: 'Launch & Evaluate', desc: 'We launch a successful free test, you evaluate' },
                 { phase: 'Weeks 1-2', title: 'Onboarding', desc: 'Onboarding and inbox warm-up' },
@@ -800,7 +801,7 @@ export default function GEXHomepage() {
       </section>
 
       {/* Featured Quotes Section */}
-      <section className="px-8 py-20">
+      <section className="px-4 md:px-8 py-12 md:py-20">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight">What Our Clients Say</h2>
@@ -855,7 +856,7 @@ export default function GEXHomepage() {
       </section>
 
       {/* Methodology */}
-      <section id="methodology" className="px-8 py-20 border-y border-white/5">
+      <section id="methodology" className="px-4 md:px-8 py-12 md:py-20 border-y border-white/5">
         <div className="max-w-7xl mx-auto">
           <div className="max-w-2xl mx-auto text-center mb-16">
             <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 tracking-tight">Our Methodology</h2>
@@ -900,7 +901,7 @@ export default function GEXHomepage() {
               <div className="bg-gradient-to-br from-neutral-800/50 to-neutral-900/50 rounded-2xl p-8 flex items-center justify-center border border-white/5">
                 <div className="text-center relative">
                   {/* Outer rotating ring */}
-                  <div className="relative w-64 h-64 mx-auto">
+                  <div className="relative w-48 h-48 md:w-64 md:h-64 mx-auto">
                     {/* Animated outer ring */}
                     <div className="absolute inset-0 rounded-full border-2 border-dashed border-red-700/30 spin-slow"></div>
 
@@ -912,8 +913,8 @@ export default function GEXHomepage() {
 
                     {/* Center icon */}
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-20 h-20 rounded-full bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center shadow-lg shadow-red-900/50">
-                        <span className="text-3xl">📧</span>
+                      <div className="w-14 h-14 md:w-20 md:h-20 rounded-full bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center shadow-lg shadow-red-900/50">
+                        <span className="text-2xl md:text-3xl">📧</span>
                       </div>
                     </div>
 
@@ -956,7 +957,7 @@ export default function GEXHomepage() {
               We don&apos;t just scrape. We analyze your best customers, then find everyone who looks like them.
             </p>
 
-            <div className="grid grid-cols-5 gap-3 max-w-4xl mx-auto">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 max-w-4xl mx-auto">
               {[
                 { step: '1', title: 'Your Customers', desc: 'Input your list' },
                 { step: '2', title: 'Enrich', desc: 'Add 20+ data points' },
@@ -964,9 +965,9 @@ export default function GEXHomepage() {
                 { step: '4', title: 'AI Review', desc: 'Batch API scoring' },
                 { step: '5', title: 'Validate', desc: 'Claygent + Prospeo.io' }
               ].map((item, i) => (
-                <div key={i} className="bg-white/[0.02] rounded-2xl p-4 text-center relative border border-white/5 hover:border-white/20 transition-colors">
+                <div key={i} className={`bg-white/[0.02] rounded-2xl p-4 text-center relative border border-white/5 hover:border-white/20 transition-colors ${i === 4 ? 'col-span-2 sm:col-span-1' : ''}`}>
                   {i < 4 && (
-                    <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 text-red-500 z-10 text-lg">→</div>
+                    <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 text-red-500 z-10 text-lg hidden lg:block">→</div>
                   )}
                   <span className="text-red-500 font-display font-bold text-2xl">{item.step}</span>
                   <h4 className="font-display font-semibold text-sm mt-2">{item.title}</h4>
@@ -1021,7 +1022,7 @@ export default function GEXHomepage() {
       </section>
 
       {/* What Our Partners Say */}
-      <section className="px-8 py-16">
+      <section className="px-4 md:px-8 py-12 md:py-16">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-10">
             <h2 className="font-display text-3xl md:text-4xl font-bold mb-3 tracking-tight">
@@ -1107,35 +1108,35 @@ export default function GEXHomepage() {
       </section>
 
       {/* Final CTA */}
-      <section className="px-8 py-28 relative overflow-hidden">
+      <section className="px-4 md:px-8 py-16 md:py-28 relative overflow-hidden">
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-red-700/10 rounded-full blur-3xl pointer-events-none pulse-glow"></div>
 
         <div className="max-w-4xl mx-auto text-center relative z-10">
-          <h2 className="font-display text-4xl md:text-6xl font-bold mb-6 tracking-tight">Ready to See What&apos;s Possible?</h2>
-          <p className="text-xl text-neutral-400 mb-12 leading-relaxed font-body font-light">
+          <h2 className="font-display text-3xl md:text-4xl lg:text-6xl font-bold mb-6 tracking-tight">Ready to See What&apos;s Possible?</h2>
+          <p className="text-lg md:text-xl text-neutral-400 mb-8 md:mb-12 leading-relaxed font-body font-light">
             B2B companies with $1M+ revenue. Free test campaign. Real results.
           </p>
-          <a href="https://tally.so/r/meK550" target="_blank" rel="noopener noreferrer" className="btn-hover bg-gradient-to-r from-red-500 to-red-700 text-white px-12 py-5 rounded-xl text-lg font-display font-bold shadow-lg shadow-red-900/30 inline-block">
-            Apply for Your Free Test Campaign →
+          <a href="https://tally.so/r/meK550" target="_blank" rel="noopener noreferrer" className="btn-hover bg-gradient-to-r from-red-500 to-red-700 text-white px-8 md:px-12 py-4 md:py-5 rounded-xl text-base md:text-lg font-display font-bold shadow-lg shadow-red-900/30 inline-block">
+            Apply for Free Test →
           </a>
-          <p className="text-neutral-600 mt-8 font-body font-light">No commitment. See positive responses before you decide.</p>
+          <p className="text-neutral-600 mt-6 md:mt-8 font-body font-light text-sm md:text-base">No commitment. See positive responses before you decide.</p>
         </div>
       </section>
 
       {/* Footer with Badges */}
-      <footer className="px-8 py-16 border-t border-white/5">
+      <footer className="px-4 md:px-8 py-12 md:py-16 border-t border-white/5">
         <div className="max-w-7xl mx-auto">
           {/* Badges Row */}
-          <div className="flex justify-center gap-6 mb-12 pb-12 border-b border-white/5">
+          <div className="flex justify-center gap-4 md:gap-6 mb-8 md:mb-12 pb-8 md:pb-12 border-b border-white/5">
             <img
               src={images.clayEliteBadge}
               alt="Clay Elite Studio Partner 2026"
-              className="h-20 w-auto opacity-80 hover:opacity-100 transition-opacity"
+              className="h-16 md:h-20 w-auto opacity-80 hover:opacity-100 transition-opacity"
               onError={(e) => (e.target as HTMLImageElement).style.display = 'none'}
             />
           </div>
 
-          <div className="grid md:grid-cols-4 gap-12 text-center md:text-left">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 text-center md:text-left">
             <div className="md:col-span-1">
               <div className="flex items-center gap-3 mb-4 justify-center md:justify-start">
                 <img
