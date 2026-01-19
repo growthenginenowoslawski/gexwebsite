@@ -26,6 +26,7 @@ interface Client {
   hasVideo?: boolean;
   hasQuote?: boolean;
   isLink?: boolean;
+  lightBgLogo?: boolean;
 }
 
 interface Partner {
@@ -131,8 +132,8 @@ export default function GEXHomepage() {
       name: 'Numeral',
       domain: 'numeral.com',
       years: '3+',
-      metric: 'TAM processing others couldn\'t do',
-      description: 'Partnered for 3+ years helping them process and enrich their TAM in ways other providers couldn\'t handle.'
+      metric: 'Reliable long-term lead generation',
+      description: 'Partnered for three years helping them build a pipeline over cold email targeting e-commerce founders and enriching their TAM in ways other data providers wouldn\'t be able to help.'
     },
     {
       name: 'Baton Market',
@@ -154,8 +155,7 @@ export default function GEXHomepage() {
       name: 'Online Seller Consulting',
       domain: 'onlinesellerconsulting.com',
       metric: '3-7 positive responses per day',
-      hasVideo: true,
-      description: 'Consistent daily results with video testimonial available.'
+      description: 'Consistent daily results for e-commerce consulting services.'
     },
     {
       name: 'USA Payments',
@@ -168,21 +168,20 @@ export default function GEXHomepage() {
       name: 'Oren Klaff',
       domain: 'intersectioncapital.com',
       metric: 'Investor outreach',
-      description: 'Running cold outbound campaigns to find investors for fundraising projects.'
+      description: 'Running cold outbound campaigns to find investors for fundraising projects.',
+      lightBgLogo: true
     },
     {
       name: 'Sharf Enterprises',
       domain: 'sharfenterprises.com',
       metric: '95 positive responses in 30 days',
-      hasVideo: true,
-      description: '95 positive responses in just 30 days with video testimonial available.'
+      description: '95 positive responses generated in just 30 days.'
     },
     {
       name: 'Snitcher',
       domain: 'snitcher.com',
-      metric: 'Check out how we get more leads than their branded Google ads',
-      isLink: true,
-      description: 'Our leads are cheaper than their branded Google ad spend and more scalable. One of their most efficient acquisition channels.'
+      metric: 'Cold email more efficient than Google ads',
+      description: 'Our cold email campaigns generate better ROI than their branded Google ad keywords.'
     },
     {
       name: 'Donut',
@@ -224,13 +223,6 @@ export default function GEXHomepage() {
       description: 'Dramatically reduced cost per lead compared to paid social campaigns.'
     },
     {
-      name: 'Rively',
-      domain: 'rivly.com',
-      metric: 'Check out our case study',
-      isLink: true,
-      description: 'Full case study available detailing our partnership and results.'
-    },
-    {
       name: 'Gutter Kings',
       domain: 'gutterkings.com',
       metric: '212 positive responses in 3 months',
@@ -257,10 +249,24 @@ export default function GEXHomepage() {
       photo: images.kyleMallien
     },
     {
-      quote: "The leads we get from Growth Engine X are cheaper than our branded Google ad spend and more scalable. It's become one of our most efficient acquisition channels.",
-      name: "Snitcher Team",
+      quote: "Eric is one of the most creative minds in outbound today. He is one of the most, if not the most, respected agency owner there is.",
+      name: "Varun Anand",
+      title: "Co-Founder @ Clay",
+      domain: "clay.com",
+      useLogo: true
+    },
+    {
+      quote: "Our work with Growth Engine X has led to our cold emails getting a better ROI than our branded Google ad keywords.",
+      name: "Leon",
       title: "Snitcher",
       domain: "snitcher.com",
+      useLogo: true
+    },
+    {
+      quote: "We worked with multiple agencies before Growth Engine X, and Eric is clearly working on another level compared to them. We've been working for a long time and expect to keep working with them long term.",
+      name: "John Thomas",
+      title: "Head of Marketing @ Donut",
+      domain: "donut.com",
       useLogo: true
     }
   ];
@@ -621,13 +627,13 @@ export default function GEXHomepage() {
           onClick={() => setActiveClientModal(null)}
         >
           <div
-            className="bg-gradient-to-b from-neutral-900 to-neutral-950 border border-white/10 max-w-lg w-full rounded-3xl overflow-hidden shadow-2xl animate-in"
+            className="bg-gradient-to-b from-neutral-900 to-neutral-950 border border-white/10 max-w-2xl w-full rounded-3xl overflow-hidden shadow-2xl animate-in"
             onClick={e => e.stopPropagation()}
           >
             <div className="p-8">
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 bg-white/5 rounded-xl flex items-center justify-center p-2 border border-white/10">
+                  <div className={`w-14 h-14 rounded-xl flex items-center justify-center p-2 border border-white/10 ${allClients[activeClientModal].lightBgLogo ? 'bg-white' : 'bg-white/5'}`}>
                     <img
                       src={getLogo(allClients[activeClientModal].domain)}
                       alt={allClients[activeClientModal].name}
@@ -742,12 +748,14 @@ export default function GEXHomepage() {
               >
                 {/* Logo above company name */}
                 <div className="flex justify-center mb-3 h-8 items-center">
-                  <img
-                    src={getLogo(client.domain)}
-                    alt={client.name}
-                    className="h-8 w-8 object-contain rounded"
-                    onError={(e) => (e.target as HTMLImageElement).style.display = 'none'}
-                  />
+                  <div className={`${client.lightBgLogo ? 'bg-white rounded-lg p-1' : ''}`}>
+                    <img
+                      src={getLogo(client.domain)}
+                      alt={client.name}
+                      className="h-8 w-8 object-contain rounded"
+                      onError={(e) => (e.target as HTMLImageElement).style.display = 'none'}
+                    />
+                  </div>
                 </div>
                 <h4 className="font-display font-semibold text-sm text-white text-center">{client.name}</h4>
                 {client.years && (
