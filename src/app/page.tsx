@@ -1021,6 +1021,25 @@ export default function GEXHomepage() {
         </div>
       </section>
 
+      {/* Sculpt Presentation Video Section */}
+      <section className="px-8 py-20">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="font-display text-2xl md:text-3xl font-bold mb-8 tracking-tight">
+            Check Out Our On Stage Presentation @ Sculpt As Clay's Largest User
+          </h2>
+          <div className="relative w-full aspect-video rounded-2xl overflow-hidden border border-white/10">
+            <iframe
+              className="absolute inset-0 w-full h-full"
+              src="https://www.youtube.com/embed/kFQfMZBo6Lo"
+              title="Growth Engine X Sculpt Presentation"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
+          </div>
+        </div>
+      </section>
+
       {/* What Our Partners Say */}
       <section className="px-4 md:px-8 py-12 md:py-16">
         <div className="max-w-6xl mx-auto">

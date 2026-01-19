@@ -8,6 +8,9 @@ const instrumentSans = Instrument_Sans({ subsets: ['latin'], variable: '--font-i
 export const metadata: Metadata = {
   title: 'Growth Engine X - B2B Lead Generation',
   description: 'We send 8 million+ emails per month. B2B lead generation for companies with $1M+ in revenue.',
+  icons: {
+    icon: '/images/gex-logo.png',
+  },
 }
 
 export default function RootLayout({
