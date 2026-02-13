@@ -1,6 +1,8 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
+import YouTubeFacade from '@/components/YouTubeFacade';
 import { caseStudyContent, getCaseStudyByDomain, CaseStudyContent } from '@/data/caseStudies';
 import CaseStudyModal from '@/components/CaseStudyModal';
 
@@ -44,6 +46,7 @@ interface Quote {
   domain: string;
   photo?: string;
   useLogo?: boolean;
+  link?: string;
 }
 
 export default function GEXHomepage() {
@@ -222,7 +225,6 @@ export default function GEXHomepage() {
       name: 'Bissell Vacuums',
       domain: 'bissell.com',
       metric: '3 positive responses per day',
-      hasQuote: true,
       description: 'CFO quote available about referral quality.'
     },
     {
@@ -262,7 +264,8 @@ export default function GEXHomepage() {
       name: "Varun Anand",
       title: "Co-Founder @ Clay",
       domain: "clay.com",
-      useLogo: true
+      useLogo: true,
+      link: "https://review.firstround.com/podcast/inside-clays-unconventional-path-to-1-25b/"
     },
     {
       quote: "Our work with Growth Engine X has led to our cold emails getting a better ROI than our branded Google ad keywords.",
@@ -288,14 +291,12 @@ export default function GEXHomepage() {
 
       {/* Fonts and Animations */}
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
-
         .font-display {
-          font-family: 'Instrument Sans', sans-serif;
+          font-family: var(--font-instrument), sans-serif;
         }
 
         .font-body {
-          font-family: 'Inter', sans-serif;
+          font-family: var(--font-inter), sans-serif;
         }
 
         @keyframes marquee {
@@ -330,6 +331,7 @@ export default function GEXHomepage() {
 
         .marquee-track {
           animation: marquee 40s linear infinite;
+          will-change: transform;
         }
 
         .marquee-track:hover {
@@ -453,23 +455,23 @@ export default function GEXHomepage() {
           transform: scale(1.05);
         }
 
+        @media (prefers-reduced-motion: reduce) {
+          .marquee-track,
+          .float,
+          .pulse-glow,
+          .animate-in {
+            animation: none !important;
+            transition: none !important;
+          }
+        }
+
       `}</style>
 
       {/* Navigation */}
       <nav className="border-b border-white/5 px-4 md:px-8 py-4 md:py-5 sticky top-0 z-40 backdrop-blur-2xl bg-black/60">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="flex items-center gap-2 md:gap-3">
-            <img
-              src={images.gexLogo}
-              alt="Growth Engine X"
-              className="h-8 md:h-10 w-auto"
-              onError={(e) => {
-                const target = e.target as HTMLImageElement;
-                target.style.display = 'none';
-                const sibling = target.nextSibling as HTMLElement;
-                if (sibling) sibling.style.display = 'block';
-              }}
-            />
+            <Image src={images.gexLogo} alt="Growth Engine X" width={40} height={40} priority />
             <div className="hidden w-10 h-10 relative">
               <svg viewBox="0 0 100 100" className="w-full h-full">
                 <rect x="10" y="10" width="60" height="80" fill="none" stroke="white" strokeWidth="8"/>
@@ -482,7 +484,6 @@ export default function GEXHomepage() {
           </div>
           <div className="flex gap-4 md:gap-8 items-center">
             <a href="#methodology" className="nav-link text-sm font-medium text-neutral-400 hover:text-white transition-colors hidden md:block">Methodology</a>
-            <a href="https://gamma.app/docs/Collection-of-GEX-Social-Proof-qwtscnnuryij6yj" target="_blank" rel="noopener noreferrer" className="nav-link text-sm font-medium text-neutral-400 hover:text-white transition-colors hidden md:block">More Results</a>
             <a href="/growth-drops" className="nav-link text-sm font-medium text-red-500 hover:text-red-400 transition-colors hidden md:flex items-center gap-1.5">
               Growth Drops
               <span className="text-xs">✦</span>
@@ -526,7 +527,7 @@ export default function GEXHomepage() {
 
           {/* Hero Case Studies - Above the fold */}
           <div>
-            <p className="text-xs text-neutral-500 uppercase tracking-[0.2em] mb-6 font-body font-medium">
+            <p className="text-xs text-neutral-400 uppercase tracking-[0.2em] mb-6 font-body font-medium">
               Trusted by industry leaders. Click to see results.
             </p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-5xl mx-auto">
@@ -540,6 +541,8 @@ export default function GEXHomepage() {
                     <img
                       src={getLogo(study.domain)}
                       alt={study.name}
+                      width={32}
+                      height={32}
                       className="h-8 w-8 object-contain rounded"
                       onError={(e) => {
                         const target = e.target as HTMLImageElement;
@@ -552,7 +555,7 @@ export default function GEXHomepage() {
                       <span className="text-neutral-400 text-xs font-bold">{study.name.substring(0, 2).toUpperCase()}</span>
                     </div>
                   </div>
-                  <h3 className="font-display font-semibold text-lg mb-1">{study.name}</h3>
+                  <h2 className="font-display font-semibold text-lg mb-1">{study.name}</h2>
                   <p className="text-red-500 font-bold text-sm">{study.highlight}</p>
                   <span className="text-xs text-neutral-600 group-hover:text-red-500 transition-colors mt-3 block font-body">
                     View Case Study →
@@ -612,7 +615,7 @@ export default function GEXHomepage() {
               <div key={i} className="border-glow stat-card border border-white/10 rounded-2xl p-8 card-hover">
                 <span className="text-red-500 font-display font-bold text-sm">{step.num}</span>
                 <h3 className="font-display text-xl font-bold mt-4 mb-2">{step.title}</h3>
-                <p className="text-neutral-500 font-body font-light">{step.desc}</p>
+                <p className="text-neutral-400 font-body font-light">{step.desc}</p>
               </div>
             ))}
           </div>
@@ -632,6 +635,8 @@ export default function GEXHomepage() {
                 <img
                   src={getLogo(client.domain)}
                   alt={client.name}
+                  width={32}
+                  height={32}
                   className="h-7 w-auto object-contain rounded"
                   onError={(e) => (e.target as HTMLImageElement).style.display = 'none'}
                 />
@@ -641,12 +646,81 @@ export default function GEXHomepage() {
         </div>
       </section>
 
+      {/* Featured Quotes Section */}
+      <section className="px-4 md:px-8 py-12 md:py-20">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight">Quotes from Our Clients</h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {featuredQuotes.map((item, i) => {
+              const cardContent = (
+                <>
+                  <div className="flex items-start gap-4 mb-6">
+                    {/* Photo or Logo */}
+                    {item.photo ? (
+                      <img
+                        src={item.photo}
+                        alt={item.name}
+                        className="w-16 h-16 rounded-full object-cover border-2 border-white/10"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.style.display = 'none';
+                          const sibling = target.nextSibling as HTMLElement;
+                          if (sibling) sibling.style.display = 'flex';
+                        }}
+                      />
+                    ) : item.useLogo ? (
+                      <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center flex-shrink-0 overflow-hidden border-2 border-white/10 p-2">
+                        <img
+                          src={getLogo(item.domain)}
+                          alt={item.name}
+                          width={32}
+                          height={32}
+                          className="w-10 h-10 object-contain"
+                        />
+                      </div>
+                    ) : (
+                      <div className="w-16 h-16 rounded-full bg-gradient-to-br from-neutral-700 to-neutral-800 flex items-center justify-center flex-shrink-0 overflow-hidden border-2 border-white/10">
+                        <span className="font-display font-bold text-lg text-white/60">{item.name.split(' ').map(n => n[0]).join('')}</span>
+                      </div>
+                    )}
+                    {/* Fallback initials */}
+                    <div className="hidden w-16 h-16 rounded-full bg-gradient-to-br from-neutral-700 to-neutral-800 items-center justify-center flex-shrink-0 overflow-hidden border-2 border-white/10">
+                      <span className="font-display font-bold text-lg text-white/60">{item.name.split(' ').map(n => n[0]).join('')}</span>
+                    </div>
+                    <div>
+                      <h3 className="font-display font-bold text-lg">{item.name}</h3>
+                      <p className="text-neutral-400 text-sm font-body font-light">{item.title}</p>
+                    </div>
+                  </div>
+                  <blockquote className="text-neutral-300 leading-relaxed text-lg font-body font-light italic">
+                    &quot;{item.quote}&quot;
+                  </blockquote>
+                </>
+              );
+
+              return item.link ? (
+                <a key={i} href={item.link} target="_blank" rel="noopener noreferrer" className="border-glow stat-card border border-white/10 rounded-3xl p-8 card-hover block no-underline text-inherit">
+                  {cardContent}
+                </a>
+              ) : (
+                <div key={i} className="border-glow stat-card border border-white/10 rounded-3xl p-8 card-hover">
+                  {cardContent}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       {/* Results Section */}
       <section id="results" className="px-4 md:px-8 py-12 md:py-16">
         <div className="max-w-7xl mx-auto text-center">
           <div className="mb-12">
             <h2 className="font-display text-4xl md:text-5xl font-bold mb-4 tracking-tight">The Results Speak for Themselves</h2>
-            <p className="text-neutral-500 text-lg font-body font-light">8M+ emails monthly. 62K+ positive responses in 2025. Here&apos;s what that looks like.</p>
+            <p className="text-neutral-400 text-lg font-body font-light">8M+ emails monthly. 62K+ positive responses in 2025. Here&apos;s what that looks like.</p>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
@@ -662,6 +736,8 @@ export default function GEXHomepage() {
                     <img
                       src={getLogo(client.domain)}
                       alt={client.name}
+                      width={32}
+                      height={32}
                       className="h-8 w-8 object-contain rounded"
                       onError={(e) => {
                         const target = e.target as HTMLImageElement;
@@ -677,9 +753,9 @@ export default function GEXHomepage() {
                     />
                   </div>
                 </div>
-                <h4 className="font-display font-semibold text-base text-white text-center">{client.name}</h4>
+                <h3 className="font-display font-semibold text-base text-white text-center">{client.name}</h3>
                 {client.years && (
-                  <span className="text-xs text-neutral-500 font-body block text-center mt-1">Partnered for {client.years} years</span>
+                  <span className="text-xs text-neutral-400 font-body block text-center mt-1">Partnered for {client.years} years</span>
                 )}
                 {client.metric && (
                   <p className="font-bold text-sm mt-2 text-center text-red-500">
@@ -687,11 +763,8 @@ export default function GEXHomepage() {
                     {client.isLink && ' →'}
                   </p>
                 )}
-                {client.hasQuote && (
-                  <span className="text-xs text-neutral-500 mt-1 block text-center">💬</span>
-                )}
                 {client.hasVideo && (
-                  <span className="text-xs text-neutral-500 mt-1 block text-center">🎥</span>
+                  <span className="text-xs text-neutral-400 mt-1 block text-center">🎥</span>
                 )}
               </button>
             ))}
@@ -720,7 +793,7 @@ export default function GEXHomepage() {
                   </div>
                   <p className="text-red-500 text-xs font-semibold mb-2 uppercase tracking-wider font-body">{step.phase}</p>
                   <h3 className="font-display text-lg font-bold mb-2">{step.title}</h3>
-                  <p className="text-neutral-500 text-sm font-body font-light">{step.desc}</p>
+                  <p className="text-neutral-400 text-sm font-body font-light">{step.desc}</p>
                 </div>
               ))}
             </div>
@@ -769,7 +842,7 @@ export default function GEXHomepage() {
                     <svg className="w-5 h-5 text-red-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                     </svg>
-                    <span className="text-neutral-500 font-body font-light">{item}</span>
+                    <span className="text-neutral-400 font-body font-light">{item}</span>
                   </div>
                 ))}
               </div>
@@ -797,87 +870,13 @@ export default function GEXHomepage() {
                 'All Work is Transferable to You (Domains, Inboxes, Clay Tables, Lists, etc.)'
               ].map((item, i) => (
                 <div key={i} className="flex items-start gap-3 group">
-                  <div className="w-6 h-6 bg-red-700/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-red-700/30 transition-colors">
-                    <span className="text-red-500 text-sm font-bold">&#10003;</span>
+                  <div className="w-6 h-6 bg-green-700/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-green-700/30 transition-colors">
+                    <span className="text-green-500 text-sm font-bold">&#10003;</span>
                   </div>
                   <span className="text-neutral-300 font-body font-light leading-relaxed">{item}</span>
                 </div>
               ))}
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Hormozi Interview */}
-      <section className="px-4 md:px-8 py-12 md:py-20">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-10">Check Out Our Outbound Interview w/ Alex Hormozi</h2>
-          <div className="relative w-full aspect-video rounded-2xl overflow-hidden border border-white/10">
-            <iframe
-              src="https://www.youtube.com/embed/cU7nYFnQNSA?start=760"
-              title="Outbound Interview with Alex Hormozi"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              className="absolute inset-0 w-full h-full"
-            />
-          </div>
-          <p className="text-neutral-500 text-sm font-body font-light mt-6 italic">
-            This video was just an interview opportunity. We have not worked with Alex Hormozi or his portfolio companies and this video is for educational purposes only.
-          </p>
-        </div>
-      </section>
-
-      {/* Featured Quotes Section */}
-      <section className="px-4 md:px-8 py-12 md:py-20">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight">Quotes from Our Clients</h2>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            {featuredQuotes.map((item, i) => (
-              <div key={i} className="border-glow stat-card border border-white/10 rounded-3xl p-8 card-hover">
-                <div className="flex items-start gap-4 mb-6">
-                  {/* Photo or Logo */}
-                  {item.photo ? (
-                    <img
-                      src={item.photo}
-                      alt={item.name}
-                      className="w-16 h-16 rounded-full object-cover border-2 border-white/10"
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.style.display = 'none';
-                        const sibling = target.nextSibling as HTMLElement;
-                        if (sibling) sibling.style.display = 'flex';
-                      }}
-                    />
-                  ) : item.useLogo ? (
-                    <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center flex-shrink-0 overflow-hidden border-2 border-white/10 p-2">
-                      <img
-                        src={getLogo(item.domain)}
-                        alt={item.name}
-                        className="w-10 h-10 object-contain"
-                      />
-                    </div>
-                  ) : (
-                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-neutral-700 to-neutral-800 flex items-center justify-center flex-shrink-0 overflow-hidden border-2 border-white/10">
-                      <span className="font-display font-bold text-lg text-white/60">{item.name.split(' ').map(n => n[0]).join('')}</span>
-                    </div>
-                  )}
-                  {/* Fallback initials */}
-                  <div className="hidden w-16 h-16 rounded-full bg-gradient-to-br from-neutral-700 to-neutral-800 items-center justify-center flex-shrink-0 overflow-hidden border-2 border-white/10">
-                    <span className="font-display font-bold text-lg text-white/60">{item.name.split(' ').map(n => n[0]).join('')}</span>
-                  </div>
-                  <div>
-                    <h4 className="font-display font-bold text-lg">{item.name}</h4>
-                    <p className="text-neutral-500 text-sm font-body font-light">{item.title}</p>
-                  </div>
-                </div>
-                <blockquote className="text-neutral-300 leading-relaxed text-lg font-body font-light italic">
-                  &quot;{item.quote}&quot;
-                </blockquote>
-              </div>
-            ))}
           </div>
         </div>
       </section>
@@ -998,7 +997,7 @@ export default function GEXHomepage() {
                   )}
                   <span className="text-red-500 font-display font-bold text-2xl">{item.step}</span>
                   <h4 className="font-display font-semibold text-sm mt-2">{item.title}</h4>
-                  <p className="text-neutral-500 text-xs mt-1 font-body font-light">{item.desc}</p>
+                  <p className="text-neutral-400 text-xs mt-1 font-body font-light">{item.desc}</p>
                 </div>
               ))}
             </div>
@@ -1055,15 +1054,30 @@ export default function GEXHomepage() {
             Check Out Our On Stage Presentation @ Sculpt As Clay's Largest User
           </h2>
           <div className="relative w-full aspect-video rounded-2xl overflow-hidden border border-white/10">
-            <iframe
-              className="absolute inset-0 w-full h-full"
-              src="https://www.youtube.com/embed/kFQfMZBo6Lo"
+            <YouTubeFacade
+              videoId="kFQfMZBo6Lo"
               title="Growth Engine X Sculpt Presentation"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
+              className="absolute inset-0 w-full h-full"
             />
           </div>
+        </div>
+      </section>
+
+      {/* Hormozi Interview */}
+      <section className="px-4 md:px-8 py-12 md:py-20">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-10">Check Out Our Outbound Interview w/ Alex Hormozi</h2>
+          <div className="relative w-full aspect-video rounded-2xl overflow-hidden border border-white/10">
+            <YouTubeFacade
+              videoId="cU7nYFnQNSA"
+              title="Outbound Interview with Alex Hormozi"
+              start={760}
+              className="absolute inset-0 w-full h-full rounded-2xl"
+            />
+          </div>
+          <p className="text-neutral-400 text-sm font-body font-light mt-6 italic">
+            This video was just an interview opportunity. We have not worked with Alex Hormozi or his portfolio companies and this video is for educational purposes only.
+          </p>
         </div>
       </section>
 
@@ -1083,10 +1097,10 @@ export default function GEXHomepage() {
             {/* Clay */}
             <div className="bg-white/[0.02] border border-white/10 rounded-xl p-5">
               <div className="flex items-center gap-3 mb-3">
-                <img src={getLogo('clay.com')} alt="Clay" className="h-8 w-8 rounded" />
+                <img src={getLogo('clay.com')} alt="Clay" width={32} height={32} className="h-8 w-8 rounded" />
                 <div>
                   <p className="font-semibold text-white text-sm">Clay</p>
-                  <p className="text-xs text-neutral-500">Roger Tabchouri, Engineer</p>
+                  <p className="text-xs text-neutral-400">Roger Tabchouri, Engineer</p>
                 </div>
               </div>
               <p className="text-sm text-neutral-300 italic leading-relaxed">
@@ -1097,10 +1111,10 @@ export default function GEXHomepage() {
             {/* Smartlead */}
             <div className="bg-white/[0.02] border border-white/10 rounded-xl p-5">
               <div className="flex items-center gap-3 mb-3">
-                <img src={getLogo('smartlead.ai')} alt="Smartlead" className="h-8 w-8 rounded" />
+                <img src={getLogo('smartlead.ai')} alt="Smartlead" width={32} height={32} className="h-8 w-8 rounded" />
                 <div>
                   <p className="font-semibold text-white text-sm">Smartlead</p>
-                  <p className="text-xs text-neutral-500">Vaibhav, Founder</p>
+                  <p className="text-xs text-neutral-400">Vaibhav, Founder</p>
                 </div>
               </div>
               <p className="text-sm text-neutral-300 italic leading-relaxed">
@@ -1111,10 +1125,10 @@ export default function GEXHomepage() {
             {/* Outbound Sync */}
             <div className="bg-white/[0.02] border border-white/10 rounded-xl p-5">
               <div className="flex items-center gap-3 mb-3">
-                <img src={getLogo('outboundsync.com')} alt="Outbound Sync" className="h-8 w-8 rounded" />
+                <img src={getLogo('outboundsync.com')} alt="Outbound Sync" width={32} height={32} className="h-8 w-8 rounded" />
                 <div>
                   <p className="font-semibold text-white text-sm">Outbound Sync</p>
-                  <p className="text-xs text-neutral-500">Harris Kenney, Founder</p>
+                  <p className="text-xs text-neutral-400">Harris Kenney, Founder</p>
                 </div>
               </div>
               <p className="text-sm text-neutral-300 italic leading-relaxed">
@@ -1125,10 +1139,10 @@ export default function GEXHomepage() {
             {/* HyperTide */}
             <div className="bg-white/[0.02] border border-white/10 rounded-xl p-5">
               <div className="flex items-center gap-3 mb-3">
-                <img src={getLogo('hypertide.io')} alt="HyperTide" className="h-8 w-8 rounded" />
+                <img src={getLogo('hypertide.io')} alt="HyperTide" width={32} height={32} className="h-8 w-8 rounded" />
                 <div>
                   <p className="font-semibold text-white text-sm">HyperTide</p>
-                  <p className="text-xs text-neutral-500">Omer, Founder</p>
+                  <p className="text-xs text-neutral-400">Omer, Founder</p>
                 </div>
               </div>
               <p className="text-sm text-neutral-300 italic leading-relaxed">
@@ -1139,14 +1153,28 @@ export default function GEXHomepage() {
             {/* OpsKings */}
             <div className="bg-white/[0.02] border border-white/10 rounded-xl p-5">
               <div className="flex items-center gap-3 mb-3">
-                <img src={getLogo('opskings.com')} alt="OpsKings" className="h-8 w-8 rounded" />
+                <img src={getLogo('opskings.com')} alt="OpsKings" width={32} height={32} className="h-8 w-8 rounded" />
                 <div>
                   <p className="font-semibold text-white text-sm">OpsKings</p>
-                  <p className="text-xs text-neutral-500">Stephen, Founder</p>
+                  <p className="text-xs text-neutral-400">Stephen, Founder</p>
                 </div>
               </div>
               <p className="text-sm text-neutral-300 italic leading-relaxed">
                 &quot;We built the analytics system on behalf of Eric&apos;s team and have seen the numbers first-hand. They&apos;re in another level of operations as far as comparing the other cold email agencies that we work with.&quot;
+              </p>
+            </div>
+
+            {/* Bloom Partners */}
+            <div className="bg-white/[0.02] border border-white/10 rounded-xl p-5">
+              <div className="flex items-center gap-3 mb-3">
+                <img src={getLogo('bloompartners.com')} alt="Bloom Partners" width={32} height={32} className="h-8 w-8 rounded" />
+                <div>
+                  <p className="font-semibold text-white text-sm">Bloom Partners</p>
+                  <p className="text-xs text-neutral-400">Chris Martinez, Founder</p>
+                </div>
+              </div>
+              <p className="text-sm text-neutral-300 italic leading-relaxed">
+                &quot;It is our business to coach marketing agency owners to grow their business. Not only was GEX&apos;s outbound campaigns one of the most successful partnerships we&apos;ve made, their processes are extremely well done and we recommend our other marketing agencies to work with him to grow their businesses.&quot;
               </p>
             </div>
           </div>
@@ -1157,12 +1185,12 @@ export default function GEXHomepage() {
       <section className="px-4 md:px-8 py-16 md:py-24 border-t border-white/5">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">Wall of Love</h2>
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">And if you&apos;re not one for polished case studies, here&apos;s some raw screenshots of success</h2>
           </div>
 
           <div className="flex flex-col items-center gap-6">
             {[
-              'sp-01.jpg','sp-02.png','sp-03.png','sp-04.jpg','sp-05.jpg',
+              'sp-01.jpg','sp-02.png','sp-04.jpg','sp-05.jpg',
               'sp-06.png','sp-07.png','sp-08.png','sp-09.png','sp-10.png',
               'sp-11.png','sp-12.png','sp-13.png','sp-14.png','sp-15.png',
               'sp-16.png','sp-17.png','sp-18.png','sp-19.png','sp-20.png',
@@ -1209,45 +1237,41 @@ export default function GEXHomepage() {
         <div className="max-w-7xl mx-auto">
           {/* Badges Row */}
           <div className="flex justify-center gap-4 md:gap-6 mb-8 md:mb-12 pb-8 md:pb-12 border-b border-white/5">
-            <img
+            <Image
               src={images.clayEliteBadge}
-              alt="Clay Elite Studio Partner 2026"
+              alt="Clay Elite Studio Partner"
+              width={80}
+              height={80}
               className="h-16 md:h-20 w-auto opacity-80 hover:opacity-100 transition-opacity"
-              onError={(e) => (e.target as HTMLImageElement).style.display = 'none'}
             />
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 text-center md:text-left">
             <div className="md:col-span-1">
               <div className="flex items-center gap-3 mb-4 justify-center md:justify-start">
-                <img
-                  src={images.gexLogo}
-                  alt="Growth Engine X"
-                  className="h-10 w-auto"
-                  onError={(e) => (e.target as HTMLImageElement).style.display = 'none'}
-                />
+                <Image src={images.gexLogo} alt="Growth Engine X" width={32} height={32} />
                 <span className="font-display font-bold text-lg tracking-tight">GROWTH ENGINE X</span>
               </div>
-              <p className="text-neutral-500 text-sm font-body font-light">8M+ emails monthly.</p>
+              <p className="text-neutral-400 text-sm font-body font-light">8M+ emails monthly.</p>
             </div>
             <div>
-              <h4 className="font-display font-semibold text-sm mb-4 text-neutral-400 uppercase tracking-wider">Company</h4>
-              <ul className="space-y-3 text-neutral-500 font-body font-light">
+              <h3 className="font-display font-semibold text-sm mb-4 text-neutral-400 uppercase tracking-wider">Company</h3>
+              <ul className="space-y-3 text-neutral-400 font-body font-light">
                 <li className="hover:text-white transition-colors cursor-pointer">About</li>
                 <li className="hover:text-white transition-colors cursor-pointer">Methodology</li>
                 <li className="hover:text-white transition-colors cursor-pointer">Free Test</li>
               </ul>
             </div>
             <div>
-              <h4 className="font-display font-semibold text-sm mb-4 text-neutral-400 uppercase tracking-wider">Resources</h4>
-              <ul className="space-y-3 text-neutral-500 font-body font-light">
+              <h3 className="font-display font-semibold text-sm mb-4 text-neutral-400 uppercase tracking-wider">Resources</h3>
+              <ul className="space-y-3 text-neutral-400 font-body font-light">
                 <li><a href="/growth-drops" className="text-red-500 hover:text-red-400 transition-colors">Growth Drops ✦</a></li>
                 <li className="hover:text-white transition-colors cursor-pointer">Case Studies</li>
               </ul>
             </div>
             <div>
-              <h4 className="font-display font-semibold text-sm mb-4 text-neutral-400 uppercase tracking-wider">Connect</h4>
-              <ul className="space-y-3 text-neutral-500 font-body font-light">
+              <h3 className="font-display font-semibold text-sm mb-4 text-neutral-400 uppercase tracking-wider">Connect</h3>
+              <ul className="space-y-3 text-neutral-400 font-body font-light">
                 <li><a href="https://www.linkedin.com/company/growth-engine-x/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">LinkedIn</a></li>
                 <li><a href="https://youtube.com/@ericnowoslawski?si=OPUItbyVWt_LB7XC" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">YouTube</a></li>
               </ul>
