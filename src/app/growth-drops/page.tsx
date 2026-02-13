@@ -1,9 +1,26 @@
 import Link from 'next/link';
 import { getAllArticles } from '@/lib/articles';
+import type { Metadata } from 'next'
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Growth Drops - Growth Engine X',
   description: 'Tactical cold email and outbound insights from Eric Nowoslawski. YouTube videos turned into actionable articles.',
+  alternates: {
+    canonical: '/growth-drops',
+  },
+  openGraph: {
+    type: 'website',
+    url: '/growth-drops',
+    title: 'Growth Drops - Growth Engine X',
+    description: 'Tactical cold email and outbound insights from Eric Nowoslawski. YouTube videos turned into actionable articles.',
+    images: [{ url: '/images/gex-logo.png' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Growth Drops - Growth Engine X',
+    description: 'Tactical cold email and outbound insights from Eric Nowoslawski. YouTube videos turned into actionable articles.',
+    images: ['/images/gex-logo.png'],
+  },
 };
 
 function extractVideoId(url: string): string | null {
@@ -63,7 +80,7 @@ export default function GrowthDropsPage() {
             <p className="text-center text-neutral-500 py-20">Articles coming soon.</p>
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {articles.map((article) => {
+              {articles.map((article, idx) => {
                 const videoId = extractVideoId(article.youtube_url);
                 const thumb = article.thumbnail || (videoId ? `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg` : null);
 
@@ -79,6 +96,9 @@ export default function GrowthDropsPage() {
                           src={thumb}
                           alt={article.title}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                          loading={idx < 3 ? 'eager' : 'lazy'}
+                          decoding="async"
+                          fetchPriority={idx < 3 ? 'high' : 'low'}
                         />
                       </div>
                     )}

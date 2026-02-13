@@ -638,6 +638,9 @@ export default function GEXHomepage() {
                   width={32}
                   height={32}
                   className="h-7 w-auto object-contain rounded"
+                  loading="lazy"
+                  decoding="async"
+                  fetchPriority="low"
                   onError={(e) => (e.target as HTMLImageElement).style.display = 'none'}
                 />
               </div>
@@ -679,6 +682,9 @@ export default function GEXHomepage() {
                           width={32}
                           height={32}
                           className="w-10 h-10 object-contain"
+                          loading="lazy"
+                          decoding="async"
+                          fetchPriority="low"
                         />
                       </div>
                     ) : (
@@ -739,6 +745,9 @@ export default function GEXHomepage() {
                       width={32}
                       height={32}
                       className="h-8 w-8 object-contain rounded"
+                      loading="lazy"
+                      decoding="async"
+                      fetchPriority="low"
                       onError={(e) => {
                         const target = e.target as HTMLImageElement;
                         target.style.display = 'none';
@@ -1097,7 +1106,7 @@ export default function GEXHomepage() {
             {/* Clay */}
             <div className="bg-white/[0.02] border border-white/10 rounded-xl p-5">
               <div className="flex items-center gap-3 mb-3">
-                <img src={getLogo('clay.com')} alt="Clay" width={32} height={32} className="h-8 w-8 rounded" />
+                <img src={getLogo('clay.com')} alt="Clay" width={32} height={32} className="h-8 w-8 rounded" loading="lazy" decoding="async" fetchPriority="low" />
                 <div>
                   <p className="font-semibold text-white text-sm">Clay</p>
                   <p className="text-xs text-neutral-400">Roger Tabchouri, Engineer</p>
@@ -1111,7 +1120,7 @@ export default function GEXHomepage() {
             {/* Smartlead */}
             <div className="bg-white/[0.02] border border-white/10 rounded-xl p-5">
               <div className="flex items-center gap-3 mb-3">
-                <img src={getLogo('smartlead.ai')} alt="Smartlead" width={32} height={32} className="h-8 w-8 rounded" />
+                <img src={getLogo('smartlead.ai')} alt="Smartlead" width={32} height={32} className="h-8 w-8 rounded" loading="lazy" decoding="async" fetchPriority="low" />
                 <div>
                   <p className="font-semibold text-white text-sm">Smartlead</p>
                   <p className="text-xs text-neutral-400">Vaibhav, Founder</p>
@@ -1125,7 +1134,7 @@ export default function GEXHomepage() {
             {/* Outbound Sync */}
             <div className="bg-white/[0.02] border border-white/10 rounded-xl p-5">
               <div className="flex items-center gap-3 mb-3">
-                <img src={getLogo('outboundsync.com')} alt="Outbound Sync" width={32} height={32} className="h-8 w-8 rounded" />
+                <img src={getLogo('outboundsync.com')} alt="Outbound Sync" width={32} height={32} className="h-8 w-8 rounded" loading="lazy" decoding="async" fetchPriority="low" />
                 <div>
                   <p className="font-semibold text-white text-sm">Outbound Sync</p>
                   <p className="text-xs text-neutral-400">Harris Kenney, Founder</p>
@@ -1139,7 +1148,7 @@ export default function GEXHomepage() {
             {/* HyperTide */}
             <div className="bg-white/[0.02] border border-white/10 rounded-xl p-5">
               <div className="flex items-center gap-3 mb-3">
-                <img src={getLogo('hypertide.io')} alt="HyperTide" width={32} height={32} className="h-8 w-8 rounded" />
+                <img src={getLogo('hypertide.io')} alt="HyperTide" width={32} height={32} className="h-8 w-8 rounded" loading="lazy" decoding="async" fetchPriority="low" />
                 <div>
                   <p className="font-semibold text-white text-sm">HyperTide</p>
                   <p className="text-xs text-neutral-400">Omer, Founder</p>
@@ -1153,7 +1162,7 @@ export default function GEXHomepage() {
             {/* OpsKings */}
             <div className="bg-white/[0.02] border border-white/10 rounded-xl p-5">
               <div className="flex items-center gap-3 mb-3">
-                <img src={getLogo('opskings.com')} alt="OpsKings" width={32} height={32} className="h-8 w-8 rounded" />
+                <img src={getLogo('opskings.com')} alt="OpsKings" width={32} height={32} className="h-8 w-8 rounded" loading="lazy" decoding="async" fetchPriority="low" />
                 <div>
                   <p className="font-semibold text-white text-sm">OpsKings</p>
                   <p className="text-xs text-neutral-400">Stephen, Founder</p>
@@ -1167,7 +1176,7 @@ export default function GEXHomepage() {
             {/* Bloom Partners */}
             <div className="bg-white/[0.02] border border-white/10 rounded-xl p-5">
               <div className="flex items-center gap-3 mb-3">
-                <img src={getLogo('bloompartners.com')} alt="Bloom Partners" width={32} height={32} className="h-8 w-8 rounded" />
+                <img src={getLogo('bloompartners.com')} alt="Bloom Partners" width={32} height={32} className="h-8 w-8 rounded" loading="lazy" decoding="async" fetchPriority="low" />
                 <div>
                   <p className="font-semibold text-white text-sm">Bloom Partners</p>
                   <p className="text-xs text-neutral-400">Chris Martinez, Founder</p>

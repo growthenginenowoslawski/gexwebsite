@@ -15,9 +15,32 @@ export function generateMetadata({ params }: Props): Metadata {
   const article = getArticleBySlug(params.slug);
   if (!article) return { title: 'Not Found' };
 
+  const videoId = extractVideoId(article.youtube_url);
+  const imageUrl =
+    article.thumbnail ||
+    (videoId ? `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg` : '/images/gex-logo.png');
+
   return {
     title: `${article.title} - Growth Drops`,
     description: article.description,
+    alternates: {
+      canonical: `/growth-drops/${params.slug}`,
+    },
+    openGraph: {
+      type: 'article',
+      url: `/growth-drops/${params.slug}`,
+      title: `${article.title} - Growth Drops`,
+      description: article.description,
+      publishedTime: article.published,
+      modifiedTime: article.published,
+      images: [{ url: imageUrl }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${article.title} - Growth Drops`,
+      description: article.description,
+      images: [imageUrl],
+    },
   };
 }
 
@@ -34,12 +57,48 @@ export default function ArticlePage({ params }: Props) {
   }
 
   const videoId = extractVideoId(article.youtube_url);
+  const canonicalUrl = `https://coldoutbound.com/growth-drops/${params.slug}`;
+
+  const imageUrl =
+    article.thumbnail ||
+    (videoId ? `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg` : 'https://coldoutbound.com/images/gex-logo.png');
+
+  const blogPostingJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: article.title,
+    description: article.description,
+    image: imageUrl.startsWith('/') ? `https://coldoutbound.com${imageUrl}` : imageUrl,
+    datePublished: article.published,
+    dateModified: article.published,
+    author: {
+      '@type': 'Person',
+      name: 'Eric Nowoslawski',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Growth Engine X',
+      url: 'https://coldoutbound.com',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://coldoutbound.com/images/gex-logo.png',
+      },
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': canonicalUrl,
+    },
+  }
 
   return (
     <div className="min-h-screen text-white" style={{
       fontFamily: '"Inter", system-ui, sans-serif',
       background: 'linear-gradient(180deg, #000000 0%, #080808 25%, #0a0a0a 50%, #080808 75%, #000000 100%)'
     }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingJsonLd) }}
+      />
       <style>{`
         .article-content h2 {
           font-family: 'Instrument Sans', sans-serif;
