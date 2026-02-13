@@ -698,6 +698,9 @@ export default function GEXHomepage() {
                   <blockquote className="text-neutral-300 leading-relaxed text-lg font-body font-light italic">
                     &quot;{item.quote}&quot;
                   </blockquote>
+                  {item.link && (
+                    <p className="text-[#00e5a0] text-sm font-body font-medium mt-4">Click to Watch the Interview &rarr;</p>
+                  )}
                 </>
               );
 
