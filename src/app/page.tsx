@@ -1,6 +1,8 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { caseStudyContent, getCaseStudyByDomain, CaseStudyContent } from '@/data/caseStudies';
+import CaseStudyModal from '@/components/CaseStudyModal';
 
 interface CaseStudy {
   name: string;
@@ -89,12 +91,12 @@ export default function GEXHomepage() {
 
   const caseStudies: Record<string, CaseStudy> = {
     instantly: {
-      name: 'Instantly AI',
+      name: 'Instantly.ai',
       domain: 'instantly.ai',
-      highlight: 'Partnered for 3 years',
+      highlight: 'Partnered for over 3 years',
       metric: '10-20',
       metricLabel: 'positive responses per day',
-      description: 'Long-term partnership powering their outbound growth engine',
+      description: 'Instantly.ai needed a partner who could not only generate consistent pipeline but also conduct the rigorous testing required to find their ideal outbound playbook.',
       hasGif: true
     },
     clay: {
@@ -125,6 +127,13 @@ export default function GEXHomepage() {
       metricLabel: 'positive responses per day',
       description: 'Helped boost valuation through pipeline generation during acquisition process'
     }
+  };
+
+  const heroSlugMap: Record<string, string> = {
+    instantly: 'instantly',
+    clay: 'clay',
+    notion: 'notion',
+    pathos: 'pathos',
   };
 
   const allClients: Client[] = [
@@ -443,6 +452,7 @@ export default function GEXHomepage() {
         .flywheel-segment:hover {
           transform: scale(1.05);
         }
+
       `}</style>
 
       {/* Navigation */}
@@ -473,7 +483,7 @@ export default function GEXHomepage() {
           <div className="flex gap-4 md:gap-8 items-center">
             <a href="#methodology" className="nav-link text-sm font-medium text-neutral-400 hover:text-white transition-colors hidden md:block">Methodology</a>
             <a href="https://gamma.app/docs/Collection-of-GEX-Social-Proof-qwtscnnuryij6yj" target="_blank" rel="noopener noreferrer" className="nav-link text-sm font-medium text-neutral-400 hover:text-white transition-colors hidden md:block">More Results</a>
-            <a href="#" className="nav-link text-sm font-medium text-red-500 hover:text-red-400 transition-colors hidden md:flex items-center gap-1.5">
+            <a href="/growth-drops" className="nav-link text-sm font-medium text-red-500 hover:text-red-400 transition-colors hidden md:flex items-center gap-1.5">
               Growth Drops
               <span className="text-xs">✦</span>
             </a>
@@ -524,7 +534,7 @@ export default function GEXHomepage() {
                 <button
                   key={key}
                   onClick={() => setActiveModal(key)}
-                  className="group border-glow bg-white/[0.02] border border-white/10 hover:border-red-700/50 rounded-xl p-4 text-center transition-all card-hover backdrop-blur-sm"
+                  className="group border-glow bg-white/[0.02] border border-white/10 hover:border-red-700/50 rounded-xl p-4 text-center transition-all card-hover backdrop-blur-sm flex flex-col justify-between h-full"
                 >
                   <div className="flex justify-center mb-4 h-10 items-center">
                     <img
@@ -554,134 +564,34 @@ export default function GEXHomepage() {
         </div>
       </section>
 
-      {/* Case Study Modal */}
-      {activeModal && (
-        <div
-          className="fixed inset-0 bg-black/95 backdrop-blur-xl flex items-center justify-center z-50 p-8"
-          onClick={() => setActiveModal(null)}
-        >
-          <div
-            className="bg-gradient-to-b from-neutral-900 to-neutral-950 border border-white/10 max-w-2xl w-full rounded-3xl overflow-hidden shadow-2xl animate-in"
-            onClick={e => e.stopPropagation()}
-          >
-            <div className="p-8 md:p-10">
-              <div className="flex items-center justify-between mb-8">
-                <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center p-3 border border-white/10">
-                    <img
-                      src={getLogo(caseStudies[activeModal].domain)}
-                      alt={caseStudies[activeModal].name}
-                      className="max-h-full max-w-full object-contain"
-                    />
-                  </div>
-                  <div>
-                    <h2 className="font-display text-2xl font-bold">{caseStudies[activeModal].name}</h2>
-                    <p className="text-neutral-500 font-body font-light">{caseStudies[activeModal].highlight}</p>
-                  </div>
-                </div>
-                <button
-                  onClick={() => setActiveModal(null)}
-                  className="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors border border-white/10"
-                >
-                  <span className="text-neutral-400 text-xl">×</span>
-                </button>
-              </div>
+      {/* Case Study Modal - Hero */}
+      <CaseStudyModal
+        content={activeModal ? (caseStudyContent[heroSlugMap[activeModal]] || null) : null}
+        fallback={activeModal ? {
+          name: caseStudies[activeModal].name,
+          domain: caseStudies[activeModal].domain,
+          metric: caseStudies[activeModal].metric,
+          description: caseStudies[activeModal].description || caseStudies[activeModal].highlight,
+        } : undefined}
+        onClose={() => setActiveModal(null)}
+      />
 
-              <div className="bg-white/[0.02] border border-white/10 rounded-2xl p-8 mb-6 text-center">
-                <div className="font-display text-6xl md:text-7xl font-bold text-red-500 mb-2">
-                  {caseStudies[activeModal].metric}
-                </div>
-                <p className="text-neutral-400 font-body font-light text-lg">{caseStudies[activeModal].metricLabel}</p>
-              </div>
-
-              {caseStudies[activeModal].quote && (
-                <blockquote className="border-l-2 border-red-700 pl-6 my-6">
-                  <p className="text-lg italic text-neutral-300 leading-relaxed font-body font-light">{caseStudies[activeModal].quote}</p>
-                  <cite className="text-neutral-400 text-sm mt-4 block font-body">
-                    <span className="font-medium text-white">{caseStudies[activeModal].quotee}</span>
-                    {caseStudies[activeModal].quoteeTitle && (
-                      <span className="text-neutral-500">, {caseStudies[activeModal].quoteeTitle}</span>
-                    )}
-                  </cite>
-                </blockquote>
-              )}
-
-              {caseStudies[activeModal].hasGif && (
-                <div className="bg-white/[0.02] border border-white/10 rounded-2xl h-48 flex items-center justify-center my-6">
-                  <span className="text-neutral-500 font-body">[Animated GIF: Blurred leads scrolling]</span>
-                </div>
-              )}
-
-              {caseStudies[activeModal].description && (
-                <p className="text-neutral-400 leading-relaxed font-body font-light">{caseStudies[activeModal].description}</p>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Client Modal */}
-      {activeClientModal !== null && (
-        <div
-          className="fixed inset-0 bg-black/95 backdrop-blur-xl flex items-center justify-center z-50 p-8"
-          onClick={() => setActiveClientModal(null)}
-        >
-          <div
-            className="bg-gradient-to-b from-neutral-900 to-neutral-950 border border-white/10 max-w-2xl w-full rounded-3xl overflow-hidden shadow-2xl animate-in"
-            onClick={e => e.stopPropagation()}
-          >
-            <div className="p-8">
-              <div className="flex items-center justify-between mb-6">
-                <div className="flex items-center gap-4">
-                  <div className={`w-14 h-14 rounded-xl flex items-center justify-center p-2 border border-white/10 ${allClients[activeClientModal].lightBgLogo ? 'bg-white' : 'bg-white/5'}`}>
-                    <img
-                      src={getLogo(allClients[activeClientModal].domain)}
-                      alt={allClients[activeClientModal].name}
-                      className="max-h-full max-w-full object-contain"
-                      onError={(e) => (e.target as HTMLImageElement).style.display = 'none'}
-                    />
-                  </div>
-                  <div>
-                    <h2 className="font-display text-xl font-bold">{allClients[activeClientModal].name}</h2>
-                    {allClients[activeClientModal].years && (
-                      <p className="text-neutral-500 text-sm font-body">Partnered for {allClients[activeClientModal].years} years</p>
-                    )}
-                  </div>
-                </div>
-                <button
-                  onClick={() => setActiveClientModal(null)}
-                  className="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors border border-white/10"
-                >
-                  <span className="text-neutral-400 text-xl">×</span>
-                </button>
-              </div>
-
-              <div className="bg-white/[0.02] border border-white/10 rounded-xl p-4 mb-4">
-                <p className="text-red-500 font-bold">{allClients[activeClientModal].metric}</p>
-                {allClients[activeClientModal].note && (
-                  <p className="text-neutral-500 text-sm mt-1">{allClients[activeClientModal].note}</p>
-                )}
-              </div>
-
-              <p className="text-neutral-400 leading-relaxed font-body font-light">
-                {allClients[activeClientModal].description}
-              </p>
-
-              {allClients[activeClientModal].hasVideo && (
-                <div className="mt-4 bg-white/[0.02] border border-white/10 rounded-xl p-4 text-center">
-                  <span className="text-neutral-500 text-sm">🎥 Video testimonial available</span>
-                </div>
-              )}
-
-              {allClients[activeClientModal].hasQuote && (
-                <div className="mt-4 bg-white/[0.02] border border-white/10 rounded-xl p-4 text-center">
-                  <span className="text-neutral-500 text-sm">💬 Quote available</span>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Case Study Modal - Client Grid */}
+      <CaseStudyModal
+        content={activeClientModal !== null ? (getCaseStudyByDomain(allClients[activeClientModal].domain) || null) : null}
+        fallback={activeClientModal !== null ? {
+          name: allClients[activeClientModal].name,
+          domain: allClients[activeClientModal].domain,
+          metric: allClients[activeClientModal].metric,
+          note: allClients[activeClientModal].note,
+          description: allClients[activeClientModal].description,
+          years: allClients[activeClientModal].years,
+          lightBgLogo: allClients[activeClientModal].lightBgLogo,
+          hasQuote: allClients[activeClientModal].hasQuote,
+          hasVideo: allClients[activeClientModal].hasVideo,
+        } : undefined}
+        onClose={() => setActiveClientModal(null)}
+      />
 
       {/* Free Test Section */}
       <section className="px-4 md:px-8 py-12 md:py-16">
@@ -736,33 +646,43 @@ export default function GEXHomepage() {
         <div className="max-w-7xl mx-auto text-center">
           <div className="mb-12">
             <h2 className="font-display text-4xl md:text-5xl font-bold mb-4 tracking-tight">The Results Speak for Themselves</h2>
-            <p className="text-neutral-500 text-lg font-body font-light">8M+ emails monthly. Here&apos;s what that looks like for some of our clients.</p>
+            <p className="text-neutral-500 text-lg font-body font-light">8M+ emails monthly. 62K+ positive responses in 2025. Here&apos;s what that looks like.</p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {allClients.map((client, i) => (
               <button
                 key={i}
                 onClick={() => setActiveClientModal(i)}
-                className="border-glow rounded-xl p-4 transition-all text-center bg-white/[0.02] border border-white/5 hover:border-white/20 cursor-pointer card-hover"
+                className="border-glow rounded-xl p-5 transition-all text-center bg-white/[0.02] border border-white/5 hover:border-white/20 cursor-pointer card-hover flex flex-col items-center justify-between h-full min-h-[160px]"
               >
                 {/* Logo above company name */}
-                <div className="flex justify-center mb-3 h-8 items-center">
-                  <div className={`${client.lightBgLogo ? 'bg-white rounded-lg p-1' : ''}`}>
+                <div className="flex justify-center mb-3 h-10 items-center">
+                  <div className={`${client.lightBgLogo ? 'bg-white rounded-lg p-1.5' : 'bg-white/10 rounded-lg p-1.5'}`}>
                     <img
                       src={getLogo(client.domain)}
                       alt={client.name}
                       className="h-8 w-8 object-contain rounded"
-                      onError={(e) => (e.target as HTMLImageElement).style.display = 'none'}
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                        const parent = target.parentElement;
+                        if (parent) {
+                          const fallback = document.createElement('span');
+                          fallback.className = 'text-white font-display font-bold text-sm';
+                          fallback.textContent = client.name.substring(0, 2).toUpperCase();
+                          parent.appendChild(fallback);
+                        }
+                      }}
                     />
                   </div>
                 </div>
-                <h4 className="font-display font-semibold text-sm text-white text-center">{client.name}</h4>
+                <h4 className="font-display font-semibold text-base text-white text-center">{client.name}</h4>
                 {client.years && (
-                  <span className="text-xs text-neutral-600 font-body block text-center">Partnered for {client.years} years</span>
+                  <span className="text-xs text-neutral-500 font-body block text-center mt-1">Partnered for {client.years} years</span>
                 )}
                 {client.metric && (
-                  <p className="font-bold text-xs mt-2 text-center text-red-500">
+                  <p className="font-bold text-sm mt-2 text-center text-red-500">
                     {client.metric}
                     {client.isLink && ' →'}
                   </p>
@@ -808,11 +728,110 @@ export default function GEXHomepage() {
         </div>
       </section>
 
+      {/* We Work Best With */}
+      <section className="px-4 md:px-8 py-12 md:py-20">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">We Work Best With...</h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Best Fit */}
+            <div className="bg-white/[0.02] border border-green-500/20 rounded-2xl p-8">
+              <h3 className="font-display text-xl font-bold mb-6 text-green-400">Best Fit</h3>
+              <div className="space-y-4">
+                {[
+                  'B2B Companies',
+                  'Large Target Market (100K+ Contacts)',
+                  'Lifetime Gross Profit Over $5,000',
+                  'Sales Team in Place'
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-3">
+                    <svg className="w-5 h-5 text-green-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span className="text-neutral-300 font-body font-light">{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Usually Not the Best Fit */}
+            <div className="bg-white/[0.02] border border-white/10 rounded-2xl p-8">
+              <h3 className="font-display text-xl font-bold mb-6 text-neutral-400">Usually Not the Best Fit</h3>
+              <div className="space-y-4">
+                {[
+                  'Small Target Markets (Under 40K Contacts)',
+                  'Lifetime Gross Profit Under $3,000',
+                  'No Sales System to Leverage the Leads We Generate'
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-3">
+                    <svg className="w-5 h-5 text-red-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                    <span className="text-neutral-500 font-body font-light">{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* What's Included */}
+      <section className="px-4 md:px-8 py-12 md:py-20 border-y border-white/5">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">What&apos;s Included</h2>
+          </div>
+
+          <div className="stat-card border border-white/10 rounded-2xl p-8 md:p-10">
+            <div className="grid md:grid-cols-2 gap-4">
+              {[
+                'Enterprise Cold Email Infrastructure (we send 8M+ cold emails/month for our clients)',
+                'Unlimited Access to LinkedIn Data',
+                'Unlimited B2B Business Email Addresses',
+                'Up to 5,000 Emails Sent Per Day',
+                'CRM Integrations Through OutboundSync',
+                'CRM Enrichment (Even if We Aren\'t Emailing Them!)',
+                'All Work is Transferable to You (Domains, Inboxes, Clay Tables, Lists, etc.)'
+              ].map((item, i) => (
+                <div key={i} className="flex items-start gap-3 group">
+                  <div className="w-6 h-6 bg-red-700/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-red-700/30 transition-colors">
+                    <span className="text-red-500 text-sm font-bold">&#10003;</span>
+                  </div>
+                  <span className="text-neutral-300 font-body font-light leading-relaxed">{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Hormozi Interview */}
+      <section className="px-4 md:px-8 py-12 md:py-20">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-10">Check Out Our Outbound Interview w/ Alex Hormozi</h2>
+          <div className="relative w-full aspect-video rounded-2xl overflow-hidden border border-white/10">
+            <iframe
+              src="https://www.youtube.com/embed/cU7nYFnQNSA?start=760"
+              title="Outbound Interview with Alex Hormozi"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="absolute inset-0 w-full h-full"
+            />
+          </div>
+          <p className="text-neutral-500 text-sm font-body font-light mt-6 italic">
+            This video was just an interview opportunity. We have not worked with Alex Hormozi or his portfolio companies and this video is for educational purposes only.
+          </p>
+        </div>
+      </section>
+
       {/* Featured Quotes Section */}
       <section className="px-4 md:px-8 py-12 md:py-20">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight">What Our Clients Say</h2>
+            <h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight">Quotes from Our Clients</h2>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
@@ -1134,6 +1153,41 @@ export default function GEXHomepage() {
         </div>
       </section>
 
+      {/* Wall of Love */}
+      <section className="px-4 md:px-8 py-16 md:py-24 border-t border-white/5">
+        <div className="max-w-3xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">Wall of Love</h2>
+          </div>
+
+          <div className="flex flex-col items-center gap-6">
+            {[
+              'sp-01.jpg','sp-02.png','sp-03.png','sp-04.jpg','sp-05.jpg',
+              'sp-06.png','sp-07.png','sp-08.png','sp-09.png','sp-10.png',
+              'sp-11.png','sp-12.png','sp-13.png','sp-14.png','sp-15.png',
+              'sp-16.png','sp-17.png','sp-18.png','sp-19.png','sp-20.png',
+              'sp-21.png','sp-22.png','sp-23.png','sp-24.png','sp-25.png',
+              'sp-26.png','sp-27.png','sp-28.png','sp-29.png','sp-30.png',
+              'sp-31.png','sp-32.png','sp-33.png','sp-34.png','sp-35.png',
+              'sp-36.png','sp-37.png','sp-38.png','sp-39.png','sp-40.png',
+              'sp-41.png','sp-42.png','sp-43.png','sp-44.png','sp-45.png',
+              'sp-46.png','sp-47.png','sp-48.png','sp-49.png','sp-50.png',
+              'sp-51.png','sp-52.png','sp-53.png','sp-54.png','sp-55.png',
+              'sp-56.png','sp-57.png','sp-58.png','sp-59.png','sp-60.png',
+              'sp-61.png','sp-62.png','sp-63.png','sp-64.png','sp-65.png',
+            ].map((img, i) => (
+              <img
+                key={i}
+                src={`/images/social-proof/${img}`}
+                alt="Social proof"
+                className="w-full max-w-2xl rounded-xl object-cover"
+                loading="lazy"
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Final CTA */}
       <section className="px-4 md:px-8 py-16 md:py-28 relative overflow-hidden">
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-red-700/10 rounded-full blur-3xl pointer-events-none pulse-glow"></div>
@@ -1187,20 +1241,20 @@ export default function GEXHomepage() {
             <div>
               <h4 className="font-display font-semibold text-sm mb-4 text-neutral-400 uppercase tracking-wider">Resources</h4>
               <ul className="space-y-3 text-neutral-500 font-body font-light">
-                <li className="text-red-500 hover:text-red-400 transition-colors cursor-pointer">Growth Drops ✦</li>
+                <li><a href="/growth-drops" className="text-red-500 hover:text-red-400 transition-colors">Growth Drops ✦</a></li>
                 <li className="hover:text-white transition-colors cursor-pointer">Case Studies</li>
               </ul>
             </div>
             <div>
               <h4 className="font-display font-semibold text-sm mb-4 text-neutral-400 uppercase tracking-wider">Connect</h4>
               <ul className="space-y-3 text-neutral-500 font-body font-light">
-                <li className="hover:text-white transition-colors cursor-pointer">LinkedIn</li>
-                <li className="hover:text-white transition-colors cursor-pointer">YouTube</li>
+                <li><a href="https://www.linkedin.com/company/growth-engine-x/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">LinkedIn</a></li>
+                <li><a href="https://youtube.com/@ericnowoslawski?si=OPUItbyVWt_LB7XC" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">YouTube</a></li>
               </ul>
             </div>
           </div>
           <div className="border-t border-white/5 mt-12 pt-8 text-center">
-            <p className="text-neutral-600 text-sm font-body font-light">© 2025 Growth Engine X. All rights reserved.</p>
+            <p className="text-neutral-600 text-sm font-body font-light">© 2026 Growth Engine X. All rights reserved.</p>
           </div>
         </div>
       </footer>
