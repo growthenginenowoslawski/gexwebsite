@@ -96,7 +96,7 @@ export default function GEXHomepage() {
     instantly: {
       name: 'Instantly.ai',
       domain: 'instantly.ai',
-      highlight: 'Partnered for over 3 years',
+      highlight: 'Partner for 3+ years',
       metric: '10-20',
       metricLabel: 'positive responses per day',
       description: 'Instantly.ai needed a partner who could not only generate consistent pipeline but also conduct the rigorous testing required to find their ideal outbound playbook.',
@@ -302,6 +302,45 @@ export default function GEXHomepage() {
         @keyframes marquee {
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }
+        }
+
+        @keyframes marquee-reverse {
+          0% { transform: translateX(-50%); }
+          100% { transform: translateX(0); }
+        }
+
+        .sp-marquee-track {
+          display: flex;
+          gap: 16px;
+          width: max-content;
+          will-change: transform;
+        }
+
+        .sp-marquee-row-1 {
+          animation: marquee 60s linear infinite;
+        }
+
+        .sp-marquee-row-2 {
+          animation: marquee-reverse 75s linear infinite;
+        }
+
+        .sp-marquee-row-3 {
+          animation: marquee 50s linear infinite;
+        }
+
+        .sp-marquee-container:hover .sp-marquee-track {
+          animation-play-state: paused;
+        }
+
+        .sp-marquee-container {
+          -webkit-mask-image: linear-gradient(to right, transparent 0%, black 80px, black calc(100% - 80px), transparent 100%);
+          mask-image: linear-gradient(to right, transparent 0%, black 80px, black calc(100% - 80px), transparent 100%);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .sp-marquee-track {
+            animation: none !important;
+          }
         }
 
         @keyframes float {
@@ -520,9 +559,9 @@ export default function GEXHomepage() {
             <a href="https://tally.so/r/meK550" target="_blank" rel="noopener noreferrer" className="btn-hover bg-gradient-to-r from-red-600 to-red-700 text-white px-6 md:px-8 py-3 md:py-4 rounded-xl font-display font-semibold text-base md:text-lg">
               Apply for Free Test Campaign →
             </a>
-            <button className="btn-hover border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-6 md:px-8 py-3 md:py-4 rounded-xl font-body font-medium transition-all text-sm md:text-base">
+            <a href="https://calendly.com/enowoslawski/growth-chat" target="_blank" rel="noopener noreferrer" className="btn-hover border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-6 md:px-8 py-3 md:py-4 rounded-xl font-body font-medium transition-all text-sm md:text-base">
               Looking to scale what&apos;s working? Let&apos;s talk
-            </button>
+            </a>
           </div>
 
           {/* Hero Case Studies - Above the fold */}
@@ -602,7 +641,7 @@ export default function GEXHomepage() {
           <div className="max-w-2xl mx-auto mb-12">
             <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 tracking-tight">See Results Before You Commit</h2>
             <p className="text-xl text-neutral-400 leading-relaxed font-body font-light">
-              We&apos;ll launch a real campaign for your business at no cost. If it works, we talk. If not, you&apos;ve lost nothing.
+              For those that qualify, we&apos;ll launch a campaign for your business at no cost if we don&apos;t have a current case study to show you or if you&apos;ve never done outbound before. If it works, we partner. If not, you&apos;ve lost nothing and learned more.
             </p>
           </div>
 
@@ -620,9 +659,9 @@ export default function GEXHomepage() {
             ))}
           </div>
 
-          <button className="btn-hover border border-white/20 hover:border-red-700 hover:bg-white/5 text-white px-8 py-4 rounded-xl font-display font-semibold transition-all">
-            Learn More About Free Tests →
-          </button>
+          <a href="https://tally.so/r/meK550" target="_blank" rel="noopener noreferrer" className="btn-hover bg-gradient-to-r from-red-600 to-red-700 text-white px-8 py-4 rounded-xl font-display font-semibold transition-all text-base md:text-lg inline-block">
+            Apply for Free Test Campaign →
+          </a>
         </div>
       </section>
 
@@ -1184,37 +1223,94 @@ export default function GEXHomepage() {
         </div>
       </section>
 
-      {/* Wall of Love */}
-      <section className="px-4 md:px-8 py-16 md:py-24 border-t border-white/5">
-        <div className="max-w-3xl mx-auto">
-          <div className="text-center mb-12">
+      {/* Wall of Love - 3-Row Infinite Marquee */}
+      <section className="py-16 md:py-24 border-t border-white/5 overflow-hidden">
+        <div className="max-w-3xl mx-auto px-4 md:px-8 mb-12">
+          <div className="text-center">
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">And if you&apos;re not one for polished case studies, here&apos;s some raw screenshots of success</h2>
           </div>
+        </div>
 
-          <div className="flex flex-col items-center gap-6">
-            {[
-              'sp-01.jpg','sp-02.png','sp-04.jpg','sp-05.jpg',
-              'sp-06.png','sp-07.png','sp-08.png','sp-09.png','sp-10.png',
-              'sp-11.png','sp-12.png','sp-13.png','sp-14.png','sp-15.png',
-              'sp-16.png','sp-17.png','sp-18.png','sp-19.png','sp-20.png',
-              'sp-21.png','sp-22.png','sp-23.png','sp-24.png','sp-25.png',
-              'sp-26.png','sp-27.png','sp-28.png','sp-29.png','sp-30.png',
-              'sp-31.png','sp-32.png','sp-33.png','sp-34.png','sp-35.png',
-              'sp-36.png','sp-37.png','sp-38.png','sp-39.png','sp-40.png',
-              'sp-41.png','sp-42.png','sp-43.png','sp-44.png','sp-45.png',
-              'sp-46.png','sp-47.png','sp-48.png','sp-49.png','sp-50.png',
-              'sp-51.png','sp-52.png','sp-53.png','sp-54.png','sp-55.png',
-              'sp-56.png','sp-57.png','sp-58.png','sp-59.png','sp-60.png',
-              'sp-61.png','sp-62.png','sp-63.png','sp-64.png','sp-65.png',
-            ].map((img, i) => (
-              <img
-                key={i}
-                src={`/images/social-proof/${img}`}
-                alt="Social proof"
-                className="w-full max-w-2xl rounded-xl object-cover"
-                loading="lazy"
-              />
-            ))}
+        <div className="sp-marquee-container flex flex-col gap-4">
+          {/* Row 1: scrolls left */}
+          <div className="overflow-hidden">
+            <div className="sp-marquee-track sp-marquee-row-1">
+              {[
+                'sp-01.jpg','sp-02.png','sp-04.jpg','sp-05.jpg',
+                'sp-06.png','sp-07.png','sp-08.png','sp-09.png','sp-10.png',
+                'sp-11.png','sp-12.png','sp-13.png','sp-14.png','sp-15.png',
+                'sp-16.png','sp-17.png','sp-18.png','sp-19.png','sp-20.png',
+                'sp-21.png','sp-22.png',
+                'sp-01.jpg','sp-02.png','sp-04.jpg','sp-05.jpg',
+                'sp-06.png','sp-07.png','sp-08.png','sp-09.png','sp-10.png',
+                'sp-11.png','sp-12.png','sp-13.png','sp-14.png','sp-15.png',
+                'sp-16.png','sp-17.png','sp-18.png','sp-19.png','sp-20.png',
+                'sp-21.png','sp-22.png',
+              ].map((img, i) => (
+                <div key={i} className="flex-shrink-0 rounded-xl overflow-hidden" style={{ width: '320px', height: '220px' }}>
+                  <img
+                    src={`/images/social-proof/${img}`}
+                    alt="Social proof"
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Row 2: scrolls right (reverse) */}
+          <div className="overflow-hidden">
+            <div className="sp-marquee-track sp-marquee-row-2">
+              {[
+                'sp-23.png','sp-24.png','sp-25.png','sp-26.png','sp-27.png',
+                'sp-28.png','sp-29.png','sp-30.png','sp-31.png','sp-32.png',
+                'sp-33.png','sp-34.png','sp-35.png','sp-36.png','sp-37.png',
+                'sp-38.png','sp-39.png','sp-40.png','sp-41.png','sp-42.png',
+                'sp-43.png',
+                'sp-23.png','sp-24.png','sp-25.png','sp-26.png','sp-27.png',
+                'sp-28.png','sp-29.png','sp-30.png','sp-31.png','sp-32.png',
+                'sp-33.png','sp-34.png','sp-35.png','sp-36.png','sp-37.png',
+                'sp-38.png','sp-39.png','sp-40.png','sp-41.png','sp-42.png',
+                'sp-43.png',
+              ].map((img, i) => (
+                <div key={i} className="flex-shrink-0 rounded-xl overflow-hidden" style={{ width: '320px', height: '220px' }}>
+                  <img
+                    src={`/images/social-proof/${img}`}
+                    alt="Social proof"
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Row 3: scrolls left (faster) */}
+          <div className="overflow-hidden">
+            <div className="sp-marquee-track sp-marquee-row-3">
+              {[
+                'sp-44.png','sp-45.png','sp-46.png','sp-47.png','sp-48.png',
+                'sp-49.png','sp-50.png','sp-51.png','sp-52.png','sp-53.png',
+                'sp-54.png','sp-55.png','sp-56.png','sp-57.png','sp-58.png',
+                'sp-59.png','sp-60.png','sp-61.png','sp-62.png','sp-63.png',
+                'sp-64.png','sp-65.png',
+                'sp-44.png','sp-45.png','sp-46.png','sp-47.png','sp-48.png',
+                'sp-49.png','sp-50.png','sp-51.png','sp-52.png','sp-53.png',
+                'sp-54.png','sp-55.png','sp-56.png','sp-57.png','sp-58.png',
+                'sp-59.png','sp-60.png','sp-61.png','sp-62.png','sp-63.png',
+                'sp-64.png','sp-65.png',
+              ].map((img, i) => (
+                <div key={i} className="flex-shrink-0 rounded-xl overflow-hidden" style={{ width: '320px', height: '220px' }}>
+                  <img
+                    src={`/images/social-proof/${img}`}
+                    alt="Social proof"
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
