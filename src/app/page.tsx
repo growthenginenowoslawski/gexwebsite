@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import YouTubeFacade from '@/components/YouTubeFacade';
 import { caseStudyContent, getCaseStudyByDomain, CaseStudyContent } from '@/data/caseStudies';
@@ -53,6 +53,16 @@ export default function GEXHomepage() {
   const [activeModal, setActiveModal] = useState<string | null>(null);
   const [activeClientModal, setActiveClientModal] = useState<number | null>(null);
   const [emailCount, setEmailCount] = useState(0);
+  const [lightboxImg, setLightboxImg] = useState<string | null>(null);
+
+  const closeLightbox = useCallback(() => setLightboxImg(null), []);
+
+  useEffect(() => {
+    if (!lightboxImg) return;
+    const handleKey = (e: KeyboardEvent) => { if (e.key === 'Escape') closeLightbox(); };
+    document.addEventListener('keydown', handleKey);
+    return () => document.removeEventListener('keydown', handleKey);
+  }, [lightboxImg, closeLightbox]);
 
   // Animated counter effect
   useEffect(() => {
@@ -330,6 +340,28 @@ export default function GEXHomepage() {
 
         .sp-marquee-container:hover .sp-marquee-track {
           animation-play-state: paused;
+        }
+
+        .sp-card {
+          cursor: pointer;
+          position: relative;
+        }
+
+        .sp-card .sp-zoom-hint {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: rgba(0, 0, 0, 0.5);
+          opacity: 0;
+          transition: opacity 0.2s ease;
+          border-radius: 12px;
+          pointer-events: none;
+        }
+
+        .sp-card:hover .sp-zoom-hint {
+          opacity: 1;
         }
 
         .sp-marquee-container {
@@ -1247,13 +1279,21 @@ export default function GEXHomepage() {
                 'sp-16.png','sp-17.png','sp-18.png','sp-19.png','sp-20.png',
                 'sp-21.png','sp-22.png',
               ].map((img, i) => (
-                <div key={i} className="flex-shrink-0 rounded-xl overflow-hidden bg-neutral-900" style={{ width: '480px', height: '340px' }}>
+                <div key={i} className="sp-card flex-shrink-0 rounded-xl overflow-hidden bg-neutral-900" style={{ width: '480px', height: '340px' }} onClick={() => setLightboxImg(`/images/social-proof/${img}`)}>
                   <img
                     src={`/images/social-proof/${img}`}
                     alt="Social proof"
                     className="w-full h-full object-contain p-2"
                     loading="lazy"
                   />
+                  <div className="sp-zoom-hint">
+                    <div className="flex flex-col items-center gap-2">
+                      <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607zM10.5 7.5v6m3-3h-6" />
+                      </svg>
+                      <span className="text-white text-sm font-medium font-body">Click to zoom</span>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -1274,13 +1314,21 @@ export default function GEXHomepage() {
                 'sp-38.png','sp-39.png','sp-40.png','sp-41.png','sp-42.png',
                 'sp-43.png',
               ].map((img, i) => (
-                <div key={i} className="flex-shrink-0 rounded-xl overflow-hidden bg-neutral-900" style={{ width: '480px', height: '340px' }}>
+                <div key={i} className="sp-card flex-shrink-0 rounded-xl overflow-hidden bg-neutral-900" style={{ width: '480px', height: '340px' }} onClick={() => setLightboxImg(`/images/social-proof/${img}`)}>
                   <img
                     src={`/images/social-proof/${img}`}
                     alt="Social proof"
                     className="w-full h-full object-contain p-2"
                     loading="lazy"
                   />
+                  <div className="sp-zoom-hint">
+                    <div className="flex flex-col items-center gap-2">
+                      <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607zM10.5 7.5v6m3-3h-6" />
+                      </svg>
+                      <span className="text-white text-sm font-medium font-body">Click to zoom</span>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -1301,13 +1349,21 @@ export default function GEXHomepage() {
                 'sp-59.png','sp-60.png','sp-61.png','sp-62.png','sp-63.png',
                 'sp-64.png','sp-65.png',
               ].map((img, i) => (
-                <div key={i} className="flex-shrink-0 rounded-xl overflow-hidden bg-neutral-900" style={{ width: '480px', height: '340px' }}>
+                <div key={i} className="sp-card flex-shrink-0 rounded-xl overflow-hidden bg-neutral-900" style={{ width: '480px', height: '340px' }} onClick={() => setLightboxImg(`/images/social-proof/${img}`)}>
                   <img
                     src={`/images/social-proof/${img}`}
                     alt="Social proof"
                     className="w-full h-full object-contain p-2"
                     loading="lazy"
                   />
+                  <div className="sp-zoom-hint">
+                    <div className="flex flex-col items-center gap-2">
+                      <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607zM10.5 7.5v6m3-3h-6" />
+                      </svg>
+                      <span className="text-white text-sm font-medium font-body">Click to zoom</span>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -1381,6 +1437,29 @@ export default function GEXHomepage() {
           </div>
         </div>
       </footer>
+
+      {/* Lightbox for social proof screenshots */}
+      {lightboxImg && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm cursor-pointer"
+          onClick={closeLightbox}
+        >
+          <button
+            onClick={closeLightbox}
+            className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors"
+          >
+            <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+          <img
+            src={lightboxImg}
+            alt="Social proof"
+            className="max-w-[90vw] max-h-[90vh] object-contain rounded-xl"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
     </div>
   );
 }
