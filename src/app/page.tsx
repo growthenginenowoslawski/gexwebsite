@@ -317,15 +317,15 @@ export default function GEXHomepage() {
         }
 
         .sp-marquee-row-1 {
-          animation: marquee 60s linear infinite;
+          animation: marquee 120s linear infinite;
         }
 
         .sp-marquee-row-2 {
-          animation: marquee-reverse 75s linear infinite;
+          animation: marquee-reverse 140s linear infinite;
         }
 
         .sp-marquee-row-3 {
-          animation: marquee 50s linear infinite;
+          animation: marquee 100s linear infinite;
         }
 
         .sp-marquee-container:hover .sp-marquee-track {
@@ -1247,11 +1247,11 @@ export default function GEXHomepage() {
                 'sp-16.png','sp-17.png','sp-18.png','sp-19.png','sp-20.png',
                 'sp-21.png','sp-22.png',
               ].map((img, i) => (
-                <div key={i} className="flex-shrink-0 rounded-xl overflow-hidden" style={{ width: '320px', height: '220px' }}>
+                <div key={i} className="flex-shrink-0 rounded-xl overflow-hidden bg-neutral-900" style={{ width: '480px', height: '340px' }}>
                   <img
                     src={`/images/social-proof/${img}`}
                     alt="Social proof"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-contain p-2"
                     loading="lazy"
                   />
                 </div>
@@ -1274,11 +1274,11 @@ export default function GEXHomepage() {
                 'sp-38.png','sp-39.png','sp-40.png','sp-41.png','sp-42.png',
                 'sp-43.png',
               ].map((img, i) => (
-                <div key={i} className="flex-shrink-0 rounded-xl overflow-hidden" style={{ width: '320px', height: '220px' }}>
+                <div key={i} className="flex-shrink-0 rounded-xl overflow-hidden bg-neutral-900" style={{ width: '480px', height: '340px' }}>
                   <img
                     src={`/images/social-proof/${img}`}
                     alt="Social proof"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-contain p-2"
                     loading="lazy"
                   />
                 </div>
@@ -1301,11 +1301,11 @@ export default function GEXHomepage() {
                 'sp-59.png','sp-60.png','sp-61.png','sp-62.png','sp-63.png',
                 'sp-64.png','sp-65.png',
               ].map((img, i) => (
-                <div key={i} className="flex-shrink-0 rounded-xl overflow-hidden" style={{ width: '320px', height: '220px' }}>
+                <div key={i} className="flex-shrink-0 rounded-xl overflow-hidden bg-neutral-900" style={{ width: '480px', height: '340px' }}>
                   <img
                     src={`/images/social-proof/${img}`}
                     alt="Social proof"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-contain p-2"
                     loading="lazy"
                   />
                 </div>
