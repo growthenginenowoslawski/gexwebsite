@@ -52,7 +52,6 @@ interface Quote {
 export default function GEXHomepage() {
   const [activeModal, setActiveModal] = useState<string | null>(null);
   const [activeClientModal, setActiveClientModal] = useState<number | null>(null);
-  const [emailCount, setEmailCount] = useState(0);
   const [lightboxImg, setLightboxImg] = useState<string | null>(null);
 
   const closeLightbox = useCallback(() => setLightboxImg(null), []);
@@ -64,39 +63,12 @@ export default function GEXHomepage() {
     return () => document.removeEventListener('keydown', handleKey);
   }, [lightboxImg, closeLightbox]);
 
-  // Animated counter effect
-  useEffect(() => {
-    const target = 8000000;
-    const duration = 2000;
-    const steps = 60;
-    const increment = target / steps;
-    let current = 0;
-
-    const timer = setInterval(() => {
-      current += increment;
-      if (current >= target) {
-        setEmailCount(target);
-        clearInterval(timer);
-      } else {
-        setEmailCount(Math.floor(current));
-      }
-    }, duration / steps);
-
-    return () => clearInterval(timer);
-  }, []);
-
-  const formatNumber = (num: number) => {
-    if (num >= 1000000) return (num / 1000000).toFixed(0) + 'M+';
-    return num.toLocaleString();
-  };
-
   // Logo helper - using icon.horse for reliable logos
   const getLogo = (domain: string) => `https://icon.horse/icon/${domain}`;
 
   // Image paths for Vercel deployment
   const images = {
     gexLogo: '/images/gex-logo.png',
-    kyleMallien: '/images/kyle-mallien.jpg',
     clayElitePill: '/images/clay-elite-studio-pill.png',
     clayEliteBadge: '/images/clay-elite-studio-badge.png',
     clayEliteCircle: '/images/clay-elite-studio-circle.png'
@@ -267,7 +239,7 @@ export default function GEXHomepage() {
       name: "Kyle Mallien",
       title: "Founder @ Heritage Wealth Capital",
       domain: "heritagewealthcapital.com",
-      photo: images.kyleMallien
+      useLogo: true
     },
     {
       quote: "Eric is one of the most creative minds in outbound today. He is one of the most, if not the most, respected agency owner there is.",
@@ -567,6 +539,7 @@ export default function GEXHomepage() {
         </div>
       </nav>
 
+      <main>
       {/* Hero Section - Compact */}
       <section className="px-4 md:px-8 pt-10 md:pt-16 pb-6 md:pb-8 relative overflow-hidden">
         {/* Ambient background glows */}
@@ -668,7 +641,7 @@ export default function GEXHomepage() {
       />
 
       {/* Free Test Section */}
-      <section className="px-4 md:px-8 py-12 md:py-16">
+      <section id="free-test" className="px-4 md:px-8 py-12 md:py-16">
         <div className="max-w-7xl mx-auto text-center">
           <div className="max-w-2xl mx-auto mb-12">
             <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 tracking-tight">See Results Before You Commit</h2>
@@ -1268,16 +1241,16 @@ export default function GEXHomepage() {
           <div className="overflow-hidden">
             <div className="sp-marquee-track sp-marquee-row-1">
               {[
-                'sp-01.jpg','sp-02.png','sp-04.jpg','sp-05.jpg',
-                'sp-06.png','sp-07.png','sp-08.png','sp-09.png','sp-10.png',
-                'sp-11.png','sp-12.png','sp-13.png','sp-14.png','sp-15.png',
-                'sp-16.png','sp-17.png','sp-18.png','sp-19.png','sp-20.png',
-                'sp-21.png','sp-22.png',
-                'sp-01.jpg','sp-02.png','sp-04.jpg','sp-05.jpg',
-                'sp-06.png','sp-07.png','sp-08.png','sp-09.png','sp-10.png',
-                'sp-11.png','sp-12.png','sp-13.png','sp-14.png','sp-15.png',
-                'sp-16.png','sp-17.png','sp-18.png','sp-19.png','sp-20.png',
-                'sp-21.png','sp-22.png',
+                'sp-01.webp','sp-02.webp','sp-04.webp','sp-05.webp',
+                'sp-06.webp','sp-07.webp','sp-08.webp','sp-09.webp','sp-10.webp',
+                'sp-11.webp','sp-12.webp','sp-13.webp','sp-14.webp','sp-15.webp',
+                'sp-16.webp','sp-17.webp','sp-18.webp','sp-19.webp','sp-20.webp',
+                'sp-21.webp','sp-22.webp',
+                'sp-01.webp','sp-02.webp','sp-04.webp','sp-05.webp',
+                'sp-06.webp','sp-07.webp','sp-08.webp','sp-09.webp','sp-10.webp',
+                'sp-11.webp','sp-12.webp','sp-13.webp','sp-14.webp','sp-15.webp',
+                'sp-16.webp','sp-17.webp','sp-18.webp','sp-19.webp','sp-20.webp',
+                'sp-21.webp','sp-22.webp',
               ].map((img, i) => (
                 <div key={i} className="sp-card flex-shrink-0 rounded-xl overflow-hidden bg-neutral-900" style={{ width: '480px', height: '340px' }} onClick={() => setLightboxImg(`/images/social-proof/${img}`)}>
                   <img
@@ -1303,16 +1276,16 @@ export default function GEXHomepage() {
           <div className="overflow-hidden">
             <div className="sp-marquee-track sp-marquee-row-2">
               {[
-                'sp-23.png','sp-24.png','sp-25.png','sp-26.png','sp-27.png',
-                'sp-28.png','sp-29.png','sp-30.png','sp-31.png','sp-32.png',
-                'sp-33.png','sp-34.png','sp-35.png','sp-36.png','sp-37.png',
-                'sp-38.png','sp-39.png','sp-40.png','sp-41.png','sp-42.png',
-                'sp-43.png',
-                'sp-23.png','sp-24.png','sp-25.png','sp-26.png','sp-27.png',
-                'sp-28.png','sp-29.png','sp-30.png','sp-31.png','sp-32.png',
-                'sp-33.png','sp-34.png','sp-35.png','sp-36.png','sp-37.png',
-                'sp-38.png','sp-39.png','sp-40.png','sp-41.png','sp-42.png',
-                'sp-43.png',
+                'sp-23.webp','sp-24.webp','sp-25.webp','sp-26.webp','sp-27.webp',
+                'sp-28.webp','sp-29.webp','sp-30.webp','sp-31.webp','sp-32.webp',
+                'sp-33.webp','sp-34.webp','sp-35.webp','sp-36.webp','sp-37.webp',
+                'sp-38.webp','sp-39.webp','sp-40.webp','sp-41.webp','sp-42.webp',
+                'sp-43.webp',
+                'sp-23.webp','sp-24.webp','sp-25.webp','sp-26.webp','sp-27.webp',
+                'sp-28.webp','sp-29.webp','sp-30.webp','sp-31.webp','sp-32.webp',
+                'sp-33.webp','sp-34.webp','sp-35.webp','sp-36.webp','sp-37.webp',
+                'sp-38.webp','sp-39.webp','sp-40.webp','sp-41.webp','sp-42.webp',
+                'sp-43.webp',
               ].map((img, i) => (
                 <div key={i} className="sp-card flex-shrink-0 rounded-xl overflow-hidden bg-neutral-900" style={{ width: '480px', height: '340px' }} onClick={() => setLightboxImg(`/images/social-proof/${img}`)}>
                   <img
@@ -1338,16 +1311,16 @@ export default function GEXHomepage() {
           <div className="overflow-hidden">
             <div className="sp-marquee-track sp-marquee-row-3">
               {[
-                'sp-44.png','sp-45.png','sp-46.png','sp-47.png','sp-48.png',
-                'sp-49.png','sp-50.png','sp-51.png','sp-52.png','sp-53.png',
-                'sp-54.png','sp-55.png','sp-56.png','sp-57.png','sp-58.png',
-                'sp-59.png','sp-60.png','sp-61.png','sp-62.png','sp-63.png',
-                'sp-64.png','sp-65.png',
-                'sp-44.png','sp-45.png','sp-46.png','sp-47.png','sp-48.png',
-                'sp-49.png','sp-50.png','sp-51.png','sp-52.png','sp-53.png',
-                'sp-54.png','sp-55.png','sp-56.png','sp-57.png','sp-58.png',
-                'sp-59.png','sp-60.png','sp-61.png','sp-62.png','sp-63.png',
-                'sp-64.png','sp-65.png',
+                'sp-44.webp','sp-45.webp','sp-46.webp','sp-47.webp','sp-48.webp',
+                'sp-49.webp','sp-50.webp','sp-51.webp','sp-52.webp','sp-53.webp',
+                'sp-54.webp','sp-55.webp','sp-56.webp','sp-57.webp','sp-58.webp',
+                'sp-59.webp','sp-60.webp','sp-61.webp','sp-62.webp','sp-63.webp',
+                'sp-64.webp','sp-65.webp',
+                'sp-44.webp','sp-45.webp','sp-46.webp','sp-47.webp','sp-48.webp',
+                'sp-49.webp','sp-50.webp','sp-51.webp','sp-52.webp','sp-53.webp',
+                'sp-54.webp','sp-55.webp','sp-56.webp','sp-57.webp','sp-58.webp',
+                'sp-59.webp','sp-60.webp','sp-61.webp','sp-62.webp','sp-63.webp',
+                'sp-64.webp','sp-65.webp',
               ].map((img, i) => (
                 <div key={i} className="sp-card flex-shrink-0 rounded-xl overflow-hidden bg-neutral-900" style={{ width: '480px', height: '340px' }} onClick={() => setLightboxImg(`/images/social-proof/${img}`)}>
                   <img
@@ -1386,6 +1359,7 @@ export default function GEXHomepage() {
           <p className="text-neutral-600 mt-6 md:mt-8 font-body font-light text-sm md:text-base">No commitment. See positive responses before you decide.</p>
         </div>
       </section>
+      </main>
 
       {/* Footer with Badges */}
       <footer className="px-4 md:px-8 py-12 md:py-16 border-t border-white/5">
@@ -1412,16 +1386,16 @@ export default function GEXHomepage() {
             <div>
               <h3 className="font-display font-semibold text-sm mb-4 text-neutral-400 uppercase tracking-wider">Company</h3>
               <ul className="space-y-3 text-neutral-400 font-body font-light">
-                <li className="hover:text-white transition-colors cursor-pointer">About</li>
-                <li className="hover:text-white transition-colors cursor-pointer">Methodology</li>
-                <li className="hover:text-white transition-colors cursor-pointer">Free Test</li>
+                <li><a href="#" className="hover:text-white transition-colors">About</a></li>
+                <li><a href="#methodology" className="hover:text-white transition-colors">Methodology</a></li>
+                <li><a href="#free-test" className="hover:text-white transition-colors">Free Test</a></li>
               </ul>
             </div>
             <div>
               <h3 className="font-display font-semibold text-sm mb-4 text-neutral-400 uppercase tracking-wider">Resources</h3>
               <ul className="space-y-3 text-neutral-400 font-body font-light">
                 <li><a href="/growth-drops" className="text-red-500 hover:text-red-400 transition-colors">Growth Drops ✦</a></li>
-                <li className="hover:text-white transition-colors cursor-pointer">Case Studies</li>
+                <li><a href="#results" className="hover:text-white transition-colors">Case Studies</a></li>
               </ul>
             </div>
             <div>
