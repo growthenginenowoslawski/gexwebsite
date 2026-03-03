@@ -22,7 +22,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${instrumentSans.variable} ${dmSerifDisplay.variable} ${spaceGrotesk.variable}`}>{children}</body>
+      <body suppressHydrationWarning className={`${inter.variable} ${instrumentSans.variable} ${dmSerifDisplay.variable} ${spaceGrotesk.variable}`}>{children}</body>
     </html>
   )
 }

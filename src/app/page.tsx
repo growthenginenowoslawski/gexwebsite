@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Image from 'next/image';
 import YouTubeFacade from '@/components/YouTubeFacade';
 import { caseStudyContent, getCaseStudyByDomain, CaseStudyContent } from '@/data/caseStudies';
@@ -53,6 +53,8 @@ export default function GEXHomepage() {
   const [activeModal, setActiveModal] = useState<string | null>(null);
   const [activeClientModal, setActiveClientModal] = useState<number | null>(null);
   const [lightboxImg, setLightboxImg] = useState<string | null>(null);
+  const [marqueeVisible, setMarqueeVisible] = useState(false);
+  const marqueeRef = useRef<HTMLElement>(null);
 
   const closeLightbox = useCallback(() => setLightboxImg(null), []);
 
@@ -62,6 +64,16 @@ export default function GEXHomepage() {
     document.addEventListener('keydown', handleKey);
     return () => document.removeEventListener('keydown', handleKey);
   }, [lightboxImg, closeLightbox]);
+
+  useEffect(() => {
+    if (!marqueeRef.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setMarqueeVisible(true); observer.disconnect(); } },
+      { rootMargin: '200px' }
+    );
+    observer.observe(marqueeRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   // Logo helper - using icon.horse for reliable logos
   const getLogo = (domain: string) => `https://icon.horse/icon/${domain}`;
@@ -1229,13 +1241,14 @@ export default function GEXHomepage() {
       </section>
 
       {/* Wall of Love - 3-Row Infinite Marquee */}
-      <section className="py-16 md:py-24 border-t border-white/5 overflow-hidden" style={{ contentVisibility: 'auto', containIntrinsicSize: '0 1200px' }}>
+      <section ref={marqueeRef} className="py-16 md:py-24 border-t border-white/5 overflow-hidden" style={{ minHeight: '1200px' }}>
         <div className="max-w-3xl mx-auto px-4 md:px-8 mb-12">
           <div className="text-center">
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">And if you&apos;re not one for polished case studies, here&apos;s some raw screenshots of success</h2>
           </div>
         </div>
 
+        {marqueeVisible && (
         <div className="sp-marquee-container flex flex-col gap-4">
           {/* Row 1: scrolls left */}
           <div className="overflow-hidden">
@@ -1259,7 +1272,6 @@ export default function GEXHomepage() {
                     className="w-full h-full object-contain p-2"
                     loading="lazy"
                     decoding="async"
-                    fetchPriority="low"
                   />
                   <div className="sp-zoom-hint">
                     <div className="flex flex-col items-center gap-2">
@@ -1296,7 +1308,6 @@ export default function GEXHomepage() {
                     className="w-full h-full object-contain p-2"
                     loading="lazy"
                     decoding="async"
-                    fetchPriority="low"
                   />
                   <div className="sp-zoom-hint">
                     <div className="flex flex-col items-center gap-2">
@@ -1333,7 +1344,6 @@ export default function GEXHomepage() {
                     className="w-full h-full object-contain p-2"
                     loading="lazy"
                     decoding="async"
-                    fetchPriority="low"
                   />
                   <div className="sp-zoom-hint">
                     <div className="flex flex-col items-center gap-2">
@@ -1348,6 +1358,7 @@ export default function GEXHomepage() {
             </div>
           </div>
         </div>
+        )}
       </section>
 
       {/* Final CTA */}
