@@ -1229,7 +1229,7 @@ export default function GEXHomepage() {
       </section>
 
       {/* Wall of Love - 3-Row Infinite Marquee */}
-      <section className="py-16 md:py-24 border-t border-white/5 overflow-hidden">
+      <section className="py-16 md:py-24 border-t border-white/5 overflow-hidden" style={{ contentVisibility: 'auto', containIntrinsicSize: '0 1200px' }}>
         <div className="max-w-3xl mx-auto px-4 md:px-8 mb-12">
           <div className="text-center">
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">And if you&apos;re not one for polished case studies, here&apos;s some raw screenshots of success</h2>
@@ -1258,6 +1258,8 @@ export default function GEXHomepage() {
                     alt="Social proof"
                     className="w-full h-full object-contain p-2"
                     loading="lazy"
+                    decoding="async"
+                    fetchPriority="low"
                   />
                   <div className="sp-zoom-hint">
                     <div className="flex flex-col items-center gap-2">
@@ -1293,6 +1295,8 @@ export default function GEXHomepage() {
                     alt="Social proof"
                     className="w-full h-full object-contain p-2"
                     loading="lazy"
+                    decoding="async"
+                    fetchPriority="low"
                   />
                   <div className="sp-zoom-hint">
                     <div className="flex flex-col items-center gap-2">
@@ -1328,6 +1332,8 @@ export default function GEXHomepage() {
                     alt="Social proof"
                     className="w-full h-full object-contain p-2"
                     loading="lazy"
+                    decoding="async"
+                    fetchPriority="low"
                   />
                   <div className="sp-zoom-hint">
                     <div className="flex flex-col items-center gap-2">
